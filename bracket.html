@@ -490,10 +490,13 @@
     }
 
     /* Roster / Players List merged team cell & divider */
+    #players-list table.sched-table tbody tr {
+      border-bottom: none;
+    }
     table.sched-table td.r-player {
       width: 34%;
       font-weight: 700;
-      padding: 11px 16px;
+      padding: 9px 16px;
     }
     table.sched-table td.r-id {
       width: 22%;
@@ -515,8 +518,8 @@
     table.sched-table td.r-sig {
       width: 22%;
     }
-    table.sched-table tbody tr.team-sep td {
-      border-bottom: 3px solid #ec4899;
+    #players-list table.sched-table tbody tr.team-sep td {
+      border-bottom: 2.5px solid #ec4899;
     }
   </style>
 </head>
