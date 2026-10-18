@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes">
   <title>THE FINAL SELECTION - Team Hashira Mobile Legends Try Out</title>
   <meta property="og:title" content="THE FINAL SELECTION - Team Hashira MLBB Bracket & Schedule">
   <meta property="og:description" content="Official Team Hashira Mobile Legends Try-Out Tournament Bracket & 2-Day Match Schedule">
@@ -18,14 +18,21 @@
       font-family: 'Montserrat', sans-serif;
       color: #fff;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px 0 48px;
-      overflow-x: hidden;
+      display: block;
+      padding: 16px 8px 90px;
+      overflow-x: auto;
+      overflow-y: auto;
       background:
         radial-gradient(circle at 50% 0%, rgba(217, 70, 239, 0.16) 0%, transparent 55%),
         #0d010a;
+      -webkit-overflow-scrolling: touch;
+    }
+    body.is-zoomed {
+      cursor: grab;
+    }
+    body.is-ZoomDragging {
+      cursor: grabbing;
+      user-select: none;
     }
 
     /* Quick Nav Bar */
@@ -34,9 +41,11 @@
       flex-wrap: wrap;
       gap: 10px;
       justify-content: center;
-      margin-bottom: 16px;
+      margin: 0 auto 16px auto;
       padding: 0 12px;
       z-index: 20;
+      position: sticky;
+      left: 0;
     }
     .nav-btn {
       background: linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%);
@@ -44,9 +53,9 @@
       border: 2.5px solid #ec4899;
       box-shadow: -3px 3px 0 #9d174d, 3px 3px 0 #9d174d, 0 4px 14px rgba(236, 72, 153, 0.35);
       border-radius: 999px;
-      padding: 8px 20px;
+      padding: 8px 18px;
       font-weight: 800;
-      font-size: 13px;
+      font-size: clamp(11px, 2.5vw, 13px);
       text-transform: uppercase;
       text-decoration: none;
       letter-spacing: 0.5px;
@@ -62,7 +71,8 @@
     }
 
     /* Wrapper that gets resized to the scaled stage size */
-    #frame { position: relative; margin-bottom: 32px; flex-shrink: 0; }
+    #frame { position: relative; margin: 0 auto 28px auto; }
+    #sched-frame { position: relative; margin: 0 auto; overflow: hidden; }
 
     /* Shared Team Hashira Magenta Esports Background Theme */
     .esports-bg {
@@ -174,13 +184,12 @@
        SCHEDULE SECTION — TEAM HASHIRA MAGENTA ESPORTS THEME
        ===================================================== */
     .schedule-container {
-      width: 100%;
-      max-width: 2000px;
+      width: 1400px;
+      transform-origin: 0 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       gap: 32px;
-      flex-shrink: 0;
     }
 
     .sched-card {
@@ -201,7 +210,7 @@
     .sched-header .s-title {
       font-family: 'League Spartan', sans-serif;
       font-weight: 800;
-      font-size: clamp(28px, 4vw, 46px);
+      font-size: 46px;
       letter-spacing: 1.2px;
       color: #fff;
       line-height: 1;
@@ -210,7 +219,7 @@
     .sched-header .s-sub {
       font-weight: 900;
       font-style: italic;
-      font-size: clamp(15px, 2.2vw, 22px);
+      font-size: 22px;
       color: #fde047;
       margin-top: 6px;
       letter-spacing: 0.6px;
@@ -226,7 +235,7 @@
       border-radius: 14px;
       padding: 7px 24px;
       font-weight: 800;
-      font-size: clamp(14px, 2vw, 19px);
+      font-size: 19px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
@@ -402,22 +411,82 @@
     }
 
     .note { margin-top: 18px; font-size: 13px; color: #f5d0fe; opacity: 0.75; text-align: center; padding: 0 12px; }
-    .toolbar { display: none; gap: 10px; margin-bottom: 10px; }
+    .toolbar { display: none; gap: 10px; margin-bottom: 10px; justify-content: center; }
     body.edit .toolbar { display: flex; }
     .btn { background: #db2777; color: #fff; border: 0; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
     .btn.gray { background: #334155; }
 
-    @media (max-width: 700px) {
-      .sched-card { padding: 24px 12px 20px; }
-      .sched-header { padding: 0 50px; }
-      .sched-flag { width: 52px; height: 46px; top: 14px; }
-      .sched-flag.left { left: 8px; }
-      .sched-flag.right { right: 8px; }
+    /* =====================================================
+       FLOATING MULTI-DEVICE ZOOM CONTROLS (MOBILE / TABLET / PC)
+       ===================================================== */
+    .zoom-dock {
+      position: fixed;
+      bottom: 18px;
+      right: 18px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(24, 2, 20, 0.92);
+      backdrop-filter: blur(8px);
+      border: 2.5px solid #ec4899;
+      box-shadow: -3px 3px 0 #9d174d, 3px 3px 0 #9d174d, 0 8px 25px rgba(0, 0, 0, 0.85);
+      border-radius: 999px;
+      padding: 6px 10px;
+    }
+    .z-btn {
+      background: linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%);
+      color: #1e1b4b;
+      border: 2px solid #ec4899;
+      border-radius: 999px;
+      min-width: 34px;
+      height: 34px;
+      padding: 0 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.12s, background 0.12s;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .z-btn:hover, .z-btn:active {
+      background: linear-gradient(90deg, #facc15 0%, #fbbf24 100%);
+      color: #1f0318;
+      border-color: #fff;
+      transform: scale(1.06);
+    }
+    .z-pct {
+      color: #fde047;
+      font-weight: 800;
+      font-size: 13px;
+      min-width: 52px;
+      text-align: center;
+      cursor: pointer;
+      user-select: none;
+      padding: 0 4px;
+    }
+    .z-fit {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    @media (max-width: 600px) {
+      .zoom-dock {
+        bottom: 12px;
+        right: 50%;
+        transform: translateX(50%);
+        padding: 5px 8px;
+      }
     }
 
     @media print {
       body { padding: 0; }
-      .note, .toolbar, .nav-bar { display: none !important; }
+      .note, .toolbar, .nav-bar, .zoom-dock { display: none !important; }
     }
   </style>
 </head>
@@ -425,9 +494,17 @@
 
   <!-- Top Navigation Buttons -->
   <div class="nav-bar">
-    <a class="nav-btn" href="#frame">🏆 Tournament Bracket</a>
-    <a class="nav-btn" href="#day1-schedule">📅 Day 1: Upper Bracket Schedule</a>
-    <a class="nav-btn" href="#day2-schedule">🔥 Day 2: Lower Bracket & Finals</a>
+    <button type="button" class="nav-btn" onclick="scrollToId('frame')">🏆 Tournament Bracket</button>
+    <button type="button" class="nav-btn" onclick="scrollToId('day1-schedule')">📅 Day 1: Upper Bracket Schedule</button>
+    <button type="button" class="nav-btn" onclick="scrollToId('day2-schedule')">🔥 Day 2: Lower Bracket &amp; Finals</button>
+  </div>
+
+  <!-- Floating Zoom Controls (Mobile, Tablet, Laptop, PC) -->
+  <div class="zoom-dock" aria-label="Zoom Controls">
+    <button type="button" class="z-btn" onclick="changeZoom(-0.25)" title="Zoom Out">➖</button>
+    <span id="zoom-label" class="z-pct" onclick="resetZoom()" title="Tap to Reset Zoom">100%</span>
+    <button type="button" class="z-btn" onclick="changeZoom(0.25)" title="Zoom In">➕</button>
+    <button type="button" class="z-btn z-fit" onclick="resetZoom()" title="Fit to Screen">Fit</button>
   </div>
 
   <div class="toolbar">
@@ -445,7 +522,8 @@
   <!-- =====================================================
        PART 2: DAY 1 & DAY 2 SCHEDULES (SAME ESPORTS THEME)
        ===================================================== -->
-  <div class="schedule-container">
+  <div id="sched-frame">
+    <div class="schedule-container">
 
     <!-- DAY 1 SCHEDULE CARD -->
     <div id="day1-schedule" class="sched-card esports-bg">
@@ -709,9 +787,10 @@
       </div>
     </div>
 
+    </div>
   </div>
 
-  <div class="note">🏆 Team Hashira Mobile Legends Try-Out — Official Bracket &amp; Match Schedule</div>
+  <div class="note">🏆 Team Hashira Mobile Legends Try-Out — Gamitin ang ➖ / ➕ sa baba, Pinch-to-Zoom (Mobile/Tablet), o Ctrl + Scroll (PC/Laptop) para mag-Zoom In/Out!</div>
 
   <script>
     /* =========================================================
@@ -887,18 +966,125 @@
     stage.insertAdjacentHTML('afterbegin',
       `<svg class="lines" viewBox="0 0 1000 540" preserveAspectRatio="none"><path d="${d}"/></svg>`);
 
-    function fit() {
-      const k = Math.min((window.innerWidth - 20) / 2000, 1);
+    let userZoom = 1;
+    const MIN_ZOOM = 0.5;
+    const MAX_ZOOM = 3.5;
+
+    function applyZoom() {
+      const vw = Math.max(document.documentElement.clientWidth || window.innerWidth, 280);
+      const baseK = Math.min((vw - 16) / 2000, 1);
+      const k = baseK * userZoom;
+
+      // 1. Scale Bracket Stage (2000 x 1080)
       stage.style.transform = `scale(${k})`;
-      const w = (2000 * k) + 'px';
       const f = document.getElementById('frame');
-      f.style.width = w;
+      f.style.width = (2000 * k) + 'px';
       f.style.height = (1080 * k) + 'px';
+
+      // 2. Scale Schedule Poster Board (1400px native width -> matches 2000*k visual width)
       const sc = document.querySelector('.schedule-container');
-      if (sc) sc.style.width = w;
+      const sf = document.getElementById('sched-frame');
+      if (sc && sf) {
+        const ks = (2000 * k) / 1400;
+        sc.style.transform = `scale(${ks})`;
+        sf.style.width = (2000 * k) + 'px';
+        sf.style.height = Math.ceil(sc.offsetHeight * ks) + 'px';
+      }
+
+      // 3. Update Zoom Label & Grab Cursor
+      const lbl = document.getElementById('zoom-label');
+      if (lbl) lbl.textContent = Math.round(userZoom * 100) + '%';
+      document.body.classList.toggle('is-zoomed', userZoom > 1.02);
     }
-    window.addEventListener('resize', fit);
-    fit();
+
+    function changeZoom(delta, centerClientX, centerClientY) {
+      const prevZoom = userZoom;
+      userZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, Math.round((userZoom + delta) * 100) / 100));
+      if (userZoom === prevZoom) return;
+
+      const ratio = userZoom / prevZoom;
+      const cx = centerClientX !== undefined ? centerClientX : window.innerWidth / 2;
+      const cy = centerClientY !== undefined ? centerClientY : window.innerHeight / 2;
+      const targetScrollX = (window.scrollX + cx) * ratio - cx;
+      const targetScrollY = (window.scrollY + cy) * ratio - cy;
+
+      applyZoom();
+      window.scrollTo(Math.max(0, targetScrollX), Math.max(0, targetScrollY));
+    }
+
+    function resetZoom() {
+      userZoom = 1;
+      applyZoom();
+      window.scrollTo({ left: 0, behavior: 'smooth' });
+    }
+
+    function scrollToId(id) {
+      const target = document.getElementById(id);
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      window.scrollTo({
+        top: window.scrollY + rect.top - 16,
+        behavior: 'smooth'
+      });
+    }
+
+    // PC / Laptop: Ctrl + Mouse Wheel Zoom
+    window.addEventListener('wheel', e => {
+      if (e.ctrlKey || e.metaKey) {
+        e.preventDefault();
+        const step = e.deltaY < 0 ? 0.15 : -0.15;
+        changeZoom(step, e.clientX, e.clientY);
+      }
+    }, { passive: false });
+
+    // PC / Laptop: Click and Drag to Pan when zoomed in
+    let isDragging = false, startX = 0, startY = 0, scrollLeftStart = 0, scrollTopStart = 0;
+    window.addEventListener('mousedown', e => {
+      if (userZoom <= 1.02 || isEdit) return;
+      if (e.target.closest('.zoom-dock, .nav-bar, .toolbar, button, a')) return;
+      isDragging = true;
+      document.body.classList.add('is-ZoomDragging');
+      startX = e.clientX;
+      startY = e.clientY;
+      scrollLeftStart = window.scrollX;
+      scrollTopStart = window.scrollY;
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      e.preventDefault();
+      window.scrollTo(scrollLeftStart - (e.clientX - startX), scrollTopStart - (e.clientY - startY));
+    });
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      document.body.classList.remove('is-ZoomDragging');
+    });
+
+    // Mobile / Tablet: Two-Finger Pinch-to-Zoom on custom canvas
+    let pinchStartDist = 0, pinchStartZoom = 1;
+    window.addEventListener('touchstart', e => {
+      if (e.touches.length === 2) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        pinchStartDist = Math.hypot(dx, dy);
+        pinchStartZoom = userZoom;
+      }
+    }, { passive: true });
+    window.addEventListener('touchmove', e => {
+      if (e.touches.length === 2 && pinchStartDist > 0) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        const newZoom = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, pinchStartZoom * (dist / pinchStartDist)));
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+        changeZoom(newZoom - userZoom, midX, midY);
+      }
+    }, { passive: true });
+    window.addEventListener('touchend', () => { pinchStartDist = 0; }, { passive: true });
+
+    window.addEventListener('resize', applyZoom);
+    window.addEventListener('load', applyZoom);
+    applyZoom();
 
     function resetLocal() {
       if (confirm('I-reset ang local edits?')) { localStorage.removeItem('hashiraBracket'); location.reload(); }
