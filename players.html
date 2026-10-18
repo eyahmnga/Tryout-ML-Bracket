@@ -46,10 +46,12 @@
     }
     .act-btn:hover { background: #db2777; }
 
+    /* NO outer border on .sheet so there are no extra vertical lines outside the table */
     .sheet {
       width: 100%;
       max-width: 840px;
       background: #ffffff;
+      border: none;
     }
 
     .page-block {
@@ -66,8 +68,8 @@
       margin-bottom: 12px;
     }
     .sheet-header h1 {
-      font-family: 'League Spartan', sans-serif;
-      font-size: 24px;
+      font-family: 'League Spartan', Arial, sans-serif;
+      font-size: 22px;
       font-weight: 800;
       letter-spacing: 0.5px;
       color: #0f172a;
@@ -77,7 +79,7 @@
       font-size: 12px;
       font-weight: 700;
       color: #475569;
-      margin-top: 2px;
+      margin-top: 3px;
       text-transform: uppercase;
       letter-spacing: 0.4px;
     }
@@ -85,7 +87,9 @@
     table.roster-table {
       width: 100%;
       border-collapse: collapse;
-      border: 1.5px solid #94a3b8;
+      border: 2pt solid #0f172a;
+      mso-border-alt: solid #0f172a 1.5pt;
+      mso-padding-alt: 4pt 8pt 4pt 8pt;
     }
 
     table.roster-table thead th {
@@ -95,30 +99,19 @@
       font-size: 12.5px;
       text-transform: uppercase;
       letter-spacing: 0.6px;
-      padding: 10px 12px;
-      border: 1px solid #94a3b8;
+      padding: 9px 12px;
+      border: 1.5pt solid #0f172a;
+      mso-border-alt: solid #0f172a 1.5pt;
       text-align: center;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
     }
-    table.roster-table thead th:first-child {
-      text-align: left;
-      padding-left: 16px;
-    }
 
-    tbody.team-group {
-      page-break-inside: avoid;
-      break-inside: avoid;
-      border-bottom: 2px solid #64748b;
-    }
-
-    /* Clean rows without black horizontal lines cutting between teammates */
+    /* Full cell border lines on every cell (Players Name, ID, Team Name, Signature) */
     table.roster-table td {
-      border-top: none;
-      border-bottom: none;
-      border-left: 1px solid #cbd5e1;
-      border-right: 1px solid #cbd5e1;
-      padding: 6px 14px;
+      border: 1pt solid #0f172a;
+      mso-border-alt: solid #0f172a 1pt;
+      padding: 6px 12px;
       font-size: 13px;
       vertical-align: middle;
       height: 30px;
@@ -126,21 +119,12 @@
 
     table.roster-table td.col-player {
       width: 34%;
-      font-weight: 600;
+      font-weight: 700;
       color: #0f172a;
-      padding-left: 16px;
     }
     table.roster-table td.col-id {
       width: 22%;
       text-align: center;
-    }
-    /* Subtle write-in line for ID and Signature */
-    .line-slot {
-      display: block;
-      width: 85%;
-      margin: 0 auto;
-      border-bottom: 1px solid #cbd5e1;
-      height: 18px;
     }
     table.roster-table td.col-team {
       width: 22%;
@@ -149,7 +133,11 @@
       font-size: 14px;
       text-transform: uppercase;
       background: #fdf2f8;
-      color: #831843;
+      color: #1e1b4b;
+      border-top: 2pt solid #0f172a;
+      border-bottom: 2pt solid #0f172a;
+      border-left: 1.5pt solid #0f172a;
+      border-right: 1.5pt solid #0f172a;
       padding: 10px 8px;
       vertical-align: middle;
       -webkit-print-color-adjust: exact;
@@ -157,6 +145,12 @@
     }
     table.roster-table td.col-sig {
       width: 22%;
+    }
+
+    /* Bold line separating one team from the next team */
+    tr.team-end td {
+      border-bottom: 2pt solid #0f172a;
+      mso-border-bottom-alt: solid #0f172a 2pt;
     }
 
     .match-sub {
@@ -171,7 +165,7 @@
     @media print {
       body { padding: 0; }
       .top-actions { display: none !important; }
-      .sheet { max-width: 100%; }
+      .sheet { max-width: 100%; border: none !important; }
       .page-break { margin-top: 0; }
     }
   </style>
@@ -185,14 +179,14 @@
 
   <div class="sheet">
 
-    <!-- ==================== PAGE 1: MATCH 1 & MATCH 2 ==================== -->
+    <!-- ==================== PAGE 1: MATCH 1 & MATCH 2 (4 TEAMS) ==================== -->
     <div class="page-block">
       <div class="sheet-header">
         <h1>QUALIFIED ML REGISTRANTS — FORBES INTRAM 2026</h1>
         <h2>THE FINAL SELECTION — TEAM HASHIRA MOBILE LEGENDS TRY OUT (PLAYERS LIST)</h2>
       </div>
 
-      <table class="roster-table">
+      <table class="roster-table" border="1" cellspacing="0" cellpadding="6">
         <thead>
           <tr>
             <th>Players Name</th>
@@ -201,154 +195,149 @@
             <th>Signature</th>
           </tr>
         </thead>
-
-        <!-- TEAM 1: TEAM TARA S -->
-        <tbody class="team-group">
+        <tbody>
+          <!-- TEAM 1: TEAM TARA S (5 Players) -->
           <tr>
             <td class="col-player">1. Symon Bahoy</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               TEAM TARA S
-              <span class="match-sub">Match 1 (CCJE)</span>
+              <br><span class="match-sub">Match 1 (CCJE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Anthony Antones</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Ralph Arcenue</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Jhon Lawrence Alegre</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. Jesrelle Ardin Guianan</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 2: CASH OUT -->
-        <tbody class="team-group">
+          <!-- TEAM 2: CASH OUT (5 Players) -->
           <tr>
             <td class="col-player">1. Nathaniel Bernal</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               CASH OUT
-              <span class="match-sub">Match 1 (CITE)</span>
+              <br><span class="match-sub">Match 1 (CITE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Arvin Marco</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Mark Jovic Bocalig</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. John Paulo Lim</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. Cjay Piquero</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 3: TEAM KULUKOYS -->
-        <tbody class="team-group">
+          <!-- TEAM 3: TEAM KULUKOYS (5 Players) -->
           <tr>
             <td class="col-player">1. Mico Bercasio</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               TEAM KULUKOYS
-              <span class="match-sub">Match 2 (CCJE)</span>
+              <br><span class="match-sub">Match 2 (CCJE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Jerome Gelio</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. James Matienzo</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Charles Gabriel Berjuega</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. Jayson Leron</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 4: TEAM JORTS -->
-        <tbody class="team-group">
+          <!-- TEAM 4: TEAM JORTS (6 Players) -->
           <tr>
             <td class="col-player">1. Victor Camacho</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="6">
               TEAM JORTS
-              <span class="match-sub">Match 2 (CITE)</span>
+              <br><span class="match-sub">Match 2 (CITE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Sharif Hasim</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Jade Estevez</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Keneth Elamparo</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">5. Kenneth John Cardel</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">6. Matthew Ashton Tubieron</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- ==================== PAGE 2: MATCH 3 & MATCH 4 ==================== -->
+    <br clear="all" style="page-break-before:always; mso-break-type:section-break" />
+
+    <!-- ==================== PAGE 2: MATCH 3 & MATCH 4 (4 TEAMS) ==================== -->
     <div class="page-block page-break">
       <div class="sheet-header">
         <h1>QUALIFIED ML REGISTRANTS — FORBES INTRAM 2026</h1>
         <h2>THE FINAL SELECTION — TEAM HASHIRA MOBILE LEGENDS TRY OUT (PLAYERS LIST)</h2>
       </div>
 
-      <table class="roster-table">
+      <table class="roster-table" border="1" cellspacing="0" cellpadding="6">
         <thead>
           <tr>
             <th>Players Name</th>
@@ -357,141 +346,134 @@
             <th>Signature</th>
           </tr>
         </thead>
-
-        <!-- TEAM 5: TEAM LOMBROSO -->
-        <tbody class="team-group">
+        <tbody>
+          <!-- TEAM 5: TEAM LOMBROSO (5 Players) -->
           <tr>
             <td class="col-player">1. Chona Sena</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               TEAM LOMBROSO
-              <span class="match-sub">Match 3 (CCJE)</span>
+              <br><span class="match-sub">Match 3 (CCJE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Charish Jimenez</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Khatte Palermo</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Maureen Marinay</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. Lyka Andes</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 6: ALA KANIN JAN BUSSENG -->
-        <tbody class="team-group">
+          <!-- TEAM 6: ALA KANIN JAN BUSSENG (6 Players) -->
           <tr>
             <td class="col-player">1. Jed Barbastro</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="6">
               ALA KANIN JAN BUSSENG
-              <span class="match-sub">Match 3 (CITE)</span>
+              <br><span class="match-sub">Match 3 (CITE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Harvy Hicap</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Zyrksui Piojo</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Harry Bermundo</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">5. Kimbert Bron</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">6. Justin Jeremy Berdin</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 7: PALUBOG 1 -->
-        <tbody class="team-group">
+          <!-- TEAM 7: PALUBOG 1 (5 Players) -->
           <tr>
             <td class="col-player">1. Aaron Macasinag</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               PALUBOG 1
-              <span class="match-sub">Match 4 (CITE)</span>
+              <br><span class="match-sub">Match 4 (CITE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Ivan Jay Vibal</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. Larry Sapaula</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Beyonce Barajas</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. Kirsten Jon Eareck Agao</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-        </tbody>
 
-        <!-- TEAM 8: PALUBOG 2 -->
-        <tbody class="team-group">
+          <!-- TEAM 8: PALUBOG 2 (5 Players) -->
           <tr>
             <td class="col-player">1. Mark Josef Corral</td>
-            <td class="col-id"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
             <td class="col-team" rowspan="5">
               PALUBOG 2
-              <span class="match-sub">Match 4 (CITE)</span>
+              <br><span class="match-sub">Match 4 (CITE)</span>
             </td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">2. Jay Andrew Alcera</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">3. John Carlo Bitara</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
           <tr>
             <td class="col-player">4. Jhon Dave Carl Arquero</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
-          <tr>
+          <tr class="team-end">
             <td class="col-player">5. John Prencipe</td>
-            <td class="col-id"><span class="line-slot"></span></td>
-            <td class="col-sig"><span class="line-slot"></span></td>
+            <td class="col-id"></td>
+            <td class="col-sig"></td>
           </tr>
         </tbody>
       </table>
