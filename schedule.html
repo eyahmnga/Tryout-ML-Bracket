@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OFFICIAL MATCH SCHEDULE - Team Hashira Mobile Legends Try Out</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600;1,800;1,900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0c0105; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 16px 40px;
+    }
+
+    .esports-bg {
+      background:
+        linear-gradient(158deg, transparent 0 60%, rgba(150, 14, 32, .45) 60% 63%, transparent 63% 100%),
+        linear-gradient(158deg, transparent 0 66%, rgba(120, 10, 26, .35) 66% 74%, transparent 74% 100%),
+        linear-gradient(22deg,  transparent 0 72%, rgba(160, 16, 36, .40) 72% 76%, transparent 76% 100%),
+        linear-gradient(22deg,  transparent 0 78%, rgba(110, 8, 24, .35) 78% 88%, transparent 88% 100%),
+        linear-gradient(200deg, transparent 0 44%, rgba(90, 6, 20, .45) 44% 52%, transparent 52% 100%),
+        linear-gradient(-30deg, transparent 0 18%, rgba(140, 12, 30, .30) 18% 26%, transparent 26% 100%),
+        radial-gradient(ellipse at 25% 25%, rgba(70, 6, 22, .9) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 85%, rgba(90, 8, 26, .8) 0%, transparent 50%),
+        #17020a;
+    }
+
+    .schedule-container {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .sched-card {
+      position: relative;
+      border-radius: 12px;
+      border: 2px solid #5a0a1d;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+      padding: 36px 32px 32px;
+      overflow: hidden;
+    }
+
+    .sched-header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 24px;
+      padding: 0 90px;
+    }
+    .sched-header .s-title {
+      font-family: 'League Spartan', sans-serif;
+      font-weight: 800;
+      font-size: 46px;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1;
+      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+    .sched-header .s-sub {
+      font-weight: 900;
+      font-style: italic;
+      font-size: 21px;
+      color: #fbbf24;
+      margin-top: 6px;
+      letter-spacing: 0.5px;
+    }
+    .sched-header .s-day {
+      display: inline-block;
+      margin-top: 12px;
+      background: #fff7f3;
+      color: #1d3a6e;
+      border: 3px solid #e3232f;
+      box-shadow: -5px 3px 0 #a1141f, 5px 3px 0 #a1141f;
+      border-radius: 14px;
+      padding: 7px 26px;
+      font-weight: 800;
+      font-size: 18px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sched-flag {
+      position: absolute;
+      top: 18px;
+      width: 90px;
+      height: 78px;
+      pointer-events: none;
+    }
+    .sched-flag.left { left: 20px; }
+    .sched-flag.right { right: 20px; }
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 2.5px solid #e3232f;
+      box-shadow: -5px 4px 0 #a1141f, 5px 4px 0 #a1141f, 0 8px 24px rgba(0,0,0,0.6);
+      background: rgba(18, 2, 8, 0.9);
+    }
+
+    table.sched-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+    }
+
+    table.sched-table thead th {
+      background: linear-gradient(180deg, #b91c1c 0%, #7f1d1d 100%);
+      color: #fbbf24;
+      font-weight: 800;
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 13px 14px;
+      border-bottom: 2.5px solid #fbbf24;
+      text-align: left;
+    }
+    table.sched-table thead th.c-center { text-align: center; }
+
+    table.sched-table tbody tr {
+      border-bottom: 1px solid rgba(227, 35, 47, 0.25);
+    }
+    table.sched-table tbody tr:last-child { border-bottom: none; }
+
+    table.sched-table tbody tr.row-match {
+      background: rgba(255, 247, 243, 0.97);
+      color: #1d3a6e;
+    }
+    table.sched-table tbody tr.row-info {
+      background: rgba(38, 6, 16, 0.92);
+      color: #f1f5f9;
+    }
+    table.sched-table tbody tr.row-interval {
+      background: rgba(24, 3, 10, 0.85);
+      color: #cbd5e1;
+      font-style: italic;
+    }
+    table.sched-table tbody tr.row-lunch {
+      background: linear-gradient(90deg, #facc15 0%, #fbbf24 50%, #f59e0b 100%);
+      color: #17020a;
+      font-weight: 900;
+      font-style: italic;
+    }
+    table.sched-table tbody tr.row-finals {
+      background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+      color: #7c2d12;
+      font-weight: 800;
+      border-top: 2px solid #f59e0b;
+      border-bottom: 2px solid #f59e0b;
+    }
+
+    table.sched-table td {
+      padding: 11px 14px;
+      font-size: 13.5px;
+      vertical-align: middle;
+    }
+    table.sched-table td.c-time {
+      font-weight: 800;
+      white-space: nowrap;
+      text-align: center;
+      width: 175px;
+    }
+    table.sched-table td.c-code {
+      font-weight: 800;
+      text-align: center;
+      width: 150px;
+    }
+    table.sched-table td.c-details { font-weight: 700; }
+    table.sched-table td.c-format {
+      font-weight: 800;
+      text-align: center;
+      width: 90px;
+    }
+    table.sched-table td.c-dur {
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+      width: 100px;
+    }
+
+    .code-pill {
+      display: inline-block;
+      background: #1d3a6e;
+      color: #fff;
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+    .row-finals .code-pill {
+      background: #b91c1c;
+      color: #fbbf24;
+      border: 1.5px solid #7f1d1d;
+    }
+    .fmt-badge {
+      display: inline-block;
+      background: #e3232f;
+      color: #fff;
+      border-radius: 8px;
+      padding: 3px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 2px 0 #991b1b;
+    }
+    .row-finals .fmt-badge {
+      background: #1d3a6e;
+      color: #fbbf24;
+      box-shadow: 0 2px 0 #0f172a;
+    }
+    .vs-pill {
+      display: inline-block;
+      background: #e3232f;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 6px;
+      margin: 0 6px;
+    }
+    .sub-line {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.85;
+      margin-top: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="schedule-container">
+
+    <!-- DAY 1 SCHEDULE CARD -->
+    <div id="day1-schedule" class="sched-card esports-bg">
+      <div class="sched-header">
+        <div class="s-title">THE FINAL SELECTION</div>
+        <div class="s-sub">TEAM HASHIRA MOBILE LEGENDS — OFFICIAL MATCH SCHEDULE</div>
+        <div class="s-day">📅 DAY 1: UPPER BRACKET (Whole Day)</div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="sched-table">
+          <thead>
+            <tr>
+              <th class="c-center">Time Slot</th>
+              <th class="c-center">Match Code</th>
+              <th>Match Details &amp; Teams</th>
+              <th class="c-center">Format</th>
+              <th class="c-center">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-info">
+              <td class="c-time">8:00 AM – 8:15 AM</td>
+              <td class="c-code">Attendance</td>
+              <td class="c-details">Official Attendance &amp; Verification (Physics Room)</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">15 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">8:15 AM – 8:50 AM</td>
+              <td class="c-code"><span class="code-pill">Match 1</span></td>
+              <td class="c-details">TEAM TARA S <span class="vs-pill">VS</span> CASH OUT</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">8:50 AM – 9:00 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">9:00 AM – 9:35 AM</td>
+              <td class="c-code"><span class="code-pill">Match 2</span></td>
+              <td class="c-details">TEAM LULOKOYS <span class="vs-pill">VS</span> TEAM JORTS</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">9:35 AM – 9:45 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">9:45 AM – 10:20 AM</td>
+              <td class="c-code"><span class="code-pill">Match 3</span></td>
+              <td class="c-details">TEAM LOBROSO <span class="vs-pill">VS</span> ALA KANIN JAN BUSSENG</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">10:20 AM – 10:30 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">10:30 AM – 11:05 AM</td>
+              <td class="c-code"><span class="code-pill">Match 4</span></td>
+              <td class="c-details">PALUBOG 1 <span class="vs-pill">VS</span> PALUBOG 2</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-lunch">
+              <td class="c-time">11:15 NN – 1:00 PM</td>
+              <td class="c-code">🍱 LUNCH BREAK</td>
+              <td class="c-details" colspan="3">OFFICIAL LUNCH BREAK (All)</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">1:00 PM – 2:00 PM</td>
+              <td class="c-code"><span class="code-pill">Match 5</span></td>
+              <td class="c-details">Upper Semifinal 1 (Winner M1 vs Winner M3)</td>
+              <td class="c-format"><span class="fmt-badge">BO3</span></td>
+              <td class="c-dur">1 Hour</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">2:00 PM – 2:10 PM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">2:10 PM – 3:10 PM</td>
+              <td class="c-code"><span class="code-pill">Match 6</span></td>
+              <td class="c-details">Upper Semifinal 2 (Winner M2 vs Winner M4)</td>
+              <td class="c-format"><span class="fmt-badge">BO3</span></td>
+              <td class="c-dur">1 Hour</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">3:10 PM – 3:25 PM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Upper Bracket Final</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">15 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">3:25 PM – 4:25 PM</td>
+              <td class="c-code"><span class="code-pill">Match 7</span></td>
+              <td class="c-details">UPPER BRACKET FINAL (Winner M5 vs Winner M6)</td>
+              <td class="c-format"><span class="fmt-badge">BO3</span></td>
+              <td class="c-dur">1 Hour</td>
+            </tr>
+            <tr class="row-info">
+              <td class="c-time">4:25 PM – 4:35 PM</td>
+              <td class="c-code" style="font-size:11.5px; line-height:1.25;">Post-Event Egress<br>&amp; Facility Check</td>
+              <td class="c-details">
+                Day 1 Summary: Winner goes to Grand Finals
+                <span class="sub-line">Venue Clean-up, Lab Inspection &amp; Official Dismissal</span>
+              </td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DAY 2 SCHEDULE CARD -->
+    <div id="day2-schedule" class="sched-card esports-bg">
+      <div class="sched-header">
+        <div class="s-title">THE FINAL SELECTION</div>
+        <div class="s-sub">TEAM HASHIRA MOBILE LEGENDS — OFFICIAL MATCH SCHEDULE</div>
+        <div class="s-day">🔥 DAY 2: LOWER BRACKET &amp; GRAND FINALS (Whole Day)</div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="sched-table">
+          <thead>
+            <tr>
+              <th class="c-center">Time Slot</th>
+              <th class="c-center">Match Code</th>
+              <th>Match Details &amp; Teams</th>
+              <th class="c-center">Format</th>
+              <th class="c-center">Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-info">
+              <td class="c-time">8:00 AM – 8:15 AM</td>
+              <td class="c-code">Attendance</td>
+              <td class="c-details">Day 2 Attendance &amp; Check-in (Physics Room)</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">15 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">8:15 AM – 8:50 AM</td>
+              <td class="c-code"><span class="code-pill">LB Match 1</span></td>
+              <td class="c-details">Loser M1 (L1) <span class="vs-pill">VS</span> Loser M3 (L3) [Elimination]</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">8:50 AM – 9:00 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">9:00 AM – 9:35 AM</td>
+              <td class="c-code"><span class="code-pill">LB Match 2</span></td>
+              <td class="c-details">Loser M2 (L2) <span class="vs-pill">VS</span> Loser M4 (L4) [Elimination]</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">9:35 AM – 9:45 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">9:45 AM – 10:20 AM</td>
+              <td class="c-code"><span class="code-pill">LB Match 3</span></td>
+              <td class="c-details">Loser M5 (L5) <span class="vs-pill">VS</span> Loser M6 (L6) [Semifinal Losers]</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">10:20 AM – 10:30 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">10:30 AM – 11:05 AM</td>
+              <td class="c-code"><span class="code-pill">LB Match 4</span></td>
+              <td class="c-details">Winner LB 1 <span class="vs-pill">VS</span> Winner LB 2</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">11:05 AM – 11:15 AM</td>
+              <td class="c-code">Interval</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the Next Team In</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">10 mins</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">11:15 AM – 11:50 AM</td>
+              <td class="c-code"><span class="code-pill">LB Match 5</span></td>
+              <td class="c-details">LB Semifinal (Winner LB 4 vs Winner LB 3)</td>
+              <td class="c-format"><span class="fmt-badge">BO1</span></td>
+              <td class="c-dur">35 mins</td>
+            </tr>
+            <tr class="row-lunch">
+              <td class="c-time">11:50 AM – 1:00 PM</td>
+              <td class="c-code">🍱 LUNCH BREAK</td>
+              <td class="c-details" colspan="3">OFFICIAL LUNCH BREAK (70 Mins Pahinga)</td>
+            </tr>
+            <tr class="row-match">
+              <td class="c-time">1:00 PM – 2:00 PM</td>
+              <td class="c-code"><span class="code-pill">LB Match 6</span></td>
+              <td class="c-details">LOWER BRACKET FINAL (Winner LB 5 vs Loser Match 7)</td>
+              <td class="c-format"><span class="fmt-badge">BO3</span></td>
+              <td class="c-dur">1 Hour</td>
+            </tr>
+            <tr class="row-interval">
+              <td class="c-time">2:00 PM – 2:20 PM</td>
+              <td class="c-code" style="font-style:normal; font-weight:800; color:#fbbf24;">Prep &amp; Intro</td>
+              <td class="c-details">Facilitator Rest &amp; Preparing for the <strong style="color:#fff;">Grand Finals</strong> and Check Ping</td>
+              <td class="c-format">—</td>
+              <td class="c-dur">20 mins</td>
+            </tr>
+            <tr class="row-finals">
+              <td class="c-time">2:20 PM – 3:50 PM</td>
+              <td class="c-code"><span class="code-pill">🏆 FINALS</span></td>
+              <td class="c-details">GRAND FINALS (Upper Champion vs Lower Champion)</td>
+              <td class="c-format"><span class="fmt-badge">BO5</span></td>
+              <td class="c-dur">1 Hr 30m</td>
+            </tr>
+            <tr class="row-info">
+              <td class="c-time">3:50 PM – 4:20 PM</td>
+              <td class="c-code" style="font-size:11.5px; line-height:1.25;">Post-Event Egress<br>&amp; Facility Check</td>
+              <td class="c-details">
+                Awarding &amp; Crowning of the Final Team Representative!
+                <span class="sub-line">Venue Clean-up, Lab Inspection &amp; Official Dismissal</span>
+              </td>
+              <td class="c-format">—</td>
+              <td class="c-dur">30 mins</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function flagSVG(mirror) {
+      let sq = '';
+      const n = 14;
+      for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+        if ((r + c) % 2 === 0) sq += `<rect x="${c * n}" y="${r * n}" width="${n}" height="${n}" fill="#fff"/>`;
+      }
+      return `<svg class="sched-flag ${mirror ? 'right' : 'left'}" viewBox="-4 -10 66 70">
+        <g transform="${mirror ? 'translate(58,0) scale(-1,1) ' : ''}skewY(14) skewX(-8)">${sq}</g></svg>`;
+    }
+    document.querySelectorAll('.sched-card').forEach(card => {
+      card.insertAdjacentHTML('afterbegin', flagSVG(false) + flagSVG(true));
+    });
+  </script>
+</body>
+</html>
