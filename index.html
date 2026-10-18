@@ -59,7 +59,7 @@
     }
 
     /* Wrapper that gets resized to the scaled stage size */
-    #frame { position: relative; margin-bottom: 36px; }
+    #frame { position: relative; margin-bottom: 32px; flex-shrink: 0; }
 
     /* Shared Esports Background Theme */
     .esports-bg {
@@ -157,11 +157,12 @@
        ===================================================== */
     .schedule-container {
       width: 100%;
-      max-width: 1240px;
-      padding: 0 16px;
+      max-width: 2000px;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 36px;
+      gap: 32px;
+      flex-shrink: 0;
     }
 
     .sched-card {
@@ -863,12 +864,14 @@
       `<svg class="lines" viewBox="0 0 1000 540" preserveAspectRatio="none"><path d="${d}"/></svg>`);
 
     function fit() {
-      const maxW = Math.min(window.innerWidth - 24, 1208);
-      const k = Math.min(maxW / 2000, 1);
+      const k = Math.min((window.innerWidth - 20) / 2000, 1);
       stage.style.transform = `scale(${k})`;
+      const w = (2000 * k) + 'px';
       const f = document.getElementById('frame');
-      f.style.width = (2000 * k) + 'px';
+      f.style.width = w;
       f.style.height = (1080 * k) + 'px';
+      const sc = document.querySelector('.schedule-container');
+      if (sc) sc.style.width = w;
     }
     window.addEventListener('resize', fit);
     fit();
