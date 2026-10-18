@@ -491,7 +491,7 @@
 
     /* Roster / Players List merged team cell & divider */
     #players-list table.sched-table tbody tr {
-      border-bottom: none;
+      border-bottom: 1px solid rgba(236, 72, 153, 0.35);
     }
     table.sched-table td.r-player {
       width: 55%;
@@ -814,18 +814,12 @@
 
     <!-- OFFICIAL PLAYERS NAME LIST CARD -->
     <div id="players-list" class="sched-card esports-bg">
-      <div class="sched-header">
-        <div class="s-title">QUALIFIED ML REGISTRANTS — FORBES INTRAM 2026</div>
-        <div class="s-sub">TEAM HASHIRA MOBILE LEGENDS — OFFICIAL PLAYERS LIST</div>
-        <div class="s-day">OFFICIAL TEAM ROSTERS</div>
-      </div>
-
-      <div class="table-wrap">
+      <div class="table-wrap" style="margin-top: 0;">
         <table class="sched-table">
           <thead>
             <tr>
-              <th style="padding-left:24px;">Players Name</th>
-              <th class="c-center">Team Name</th>
+              <th style="padding-left:24px;">PLAYERS NAME</th>
+              <th class="c-center">TEAM NAME</th>
             </tr>
           </thead>
           <tbody>
@@ -1104,7 +1098,9 @@
 
     // Also add checkered flags to the Day 1 & Day 2 Schedule Cards
     document.querySelectorAll('.sched-card').forEach(card => {
-      card.insertAdjacentHTML('afterbegin', flagSVG(false, 'sched-flag') + flagSVG(true, 'sched-flag'));
+      if (card.querySelector('.sched-header')) {
+        card.insertAdjacentHTML('afterbegin', flagSVG(false, 'sched-flag') + flagSVG(true, 'sched-flag'));
+      }
     });
 
     LABELS.forEach(([t, x, y]) => {
