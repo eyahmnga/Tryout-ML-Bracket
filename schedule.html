@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Montserrat:ital,wght@0,500;0,600;0,700;0,800;1,600;1,800;1,900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { background: #0c0105; }
+    html { scroll-behavior: smooth; background: #0d010a; }
     body {
       font-family: 'Montserrat', sans-serif;
       color: #fff;
@@ -18,19 +18,23 @@
       flex-direction: column;
       align-items: center;
       padding: 20px 16px 40px;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(217, 70, 239, 0.16) 0%, transparent 55%),
+        #0d010a;
     }
 
     .esports-bg {
       background:
-        linear-gradient(158deg, transparent 0 60%, rgba(150, 14, 32, .45) 60% 63%, transparent 63% 100%),
-        linear-gradient(158deg, transparent 0 66%, rgba(120, 10, 26, .35) 66% 74%, transparent 74% 100%),
-        linear-gradient(22deg,  transparent 0 72%, rgba(160, 16, 36, .40) 72% 76%, transparent 76% 100%),
-        linear-gradient(22deg,  transparent 0 78%, rgba(110, 8, 24, .35) 78% 88%, transparent 88% 100%),
-        linear-gradient(200deg, transparent 0 44%, rgba(90, 6, 20, .45) 44% 52%, transparent 52% 100%),
-        linear-gradient(-30deg, transparent 0 18%, rgba(140, 12, 30, .30) 18% 26%, transparent 26% 100%),
-        radial-gradient(ellipse at 25% 25%, rgba(70, 6, 22, .9) 0%, transparent 55%),
-        radial-gradient(ellipse at 85% 85%, rgba(90, 8, 26, .8) 0%, transparent 50%),
-        #17020a;
+        linear-gradient(158deg, transparent 0 60%, rgba(219, 39, 119, 0.48) 60% 63%, transparent 63% 100%),
+        linear-gradient(158deg, transparent 0 66%, rgba(162, 28, 175, 0.36) 66% 74%, transparent 74% 100%),
+        linear-gradient(22deg,  transparent 0 72%, rgba(236, 72, 153, 0.42) 72% 76%, transparent 76% 100%),
+        linear-gradient(22deg,  transparent 0 78%, rgba(157, 23, 77, 0.38) 78% 88%, transparent 88% 100%),
+        linear-gradient(200deg, transparent 0 44%, rgba(131, 24, 67, 0.48) 44% 52%, transparent 52% 100%),
+        linear-gradient(-30deg, transparent 0 18%, rgba(190, 24, 93, 0.34) 18% 26%, transparent 26% 100%),
+        radial-gradient(ellipse at 25% 22%, rgba(157, 23, 77, 0.85) 0%, transparent 55%),
+        radial-gradient(ellipse at 82% 82%, rgba(134, 25, 143, 0.75) 0%, transparent 52%),
+        radial-gradient(ellipse at 50% 50%, rgba(80, 7, 56, 0.65) 0%, transparent 70%),
+        #180214;
     }
 
     .schedule-container {
@@ -44,8 +48,8 @@
     .sched-card {
       position: relative;
       border-radius: 12px;
-      border: 2px solid #5a0a1d;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.85);
+      border: 2.5px solid rgba(236, 72, 153, 0.65);
+      box-shadow: 0 0 36px rgba(217, 70, 239, 0.22), 0 20px 50px rgba(0, 0, 0, 0.88);
       padding: 36px 32px 32px;
       overflow: hidden;
     }
@@ -60,26 +64,27 @@
       font-family: 'League Spartan', sans-serif;
       font-weight: 800;
       font-size: 46px;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       color: #fff;
       line-height: 1;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      text-shadow: 0 4px 16px rgba(236, 72, 153, 0.65), 0 2px 6px rgba(0, 0, 0, 0.85);
     }
     .sched-header .s-sub {
       font-weight: 900;
       font-style: italic;
       font-size: 21px;
-      color: #fbbf24;
+      color: #fde047;
       margin-top: 6px;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
+      text-shadow: 0 2px 10px rgba(250, 204, 21, 0.35);
     }
     .sched-header .s-day {
       display: inline-block;
       margin-top: 12px;
-      background: #fff7f3;
-      color: #1d3a6e;
-      border: 3px solid #e3232f;
-      box-shadow: -5px 3px 0 #a1141f, 5px 3px 0 #a1141f;
+      background: linear-gradient(180deg, #ffffff 0%, #fdf2f8 100%);
+      color: #1e1b4b;
+      border: 3px solid #ec4899;
+      box-shadow: -5px 3px 0 #9d174d, 5px 3px 0 #9d174d, 0 6px 16px rgba(219, 39, 119, 0.4);
       border-radius: 14px;
       padding: 7px 26px;
       font-weight: 800;
@@ -94,6 +99,7 @@
       width: 90px;
       height: 78px;
       pointer-events: none;
+      filter: drop-shadow(0 4px 10px rgba(236, 72, 153, 0.45));
     }
     .sched-flag.left { left: 20px; }
     .sched-flag.right { right: 20px; }
@@ -102,9 +108,9 @@
       width: 100%;
       overflow-x: auto;
       border-radius: 12px;
-      border: 2.5px solid #e3232f;
-      box-shadow: -5px 4px 0 #a1141f, 5px 4px 0 #a1141f, 0 8px 24px rgba(0,0,0,0.6);
-      background: rgba(18, 2, 8, 0.9);
+      border: 2.5px solid #ec4899;
+      box-shadow: -5px 4px 0 #9d174d, 5px 4px 0 #9d174d, 0 10px 28px rgba(0, 0, 0, 0.7);
+      background: rgba(22, 2, 18, 0.92);
     }
 
     table.sched-table {
@@ -114,48 +120,49 @@
     }
 
     table.sched-table thead th {
-      background: linear-gradient(180deg, #b91c1c 0%, #7f1d1d 100%);
-      color: #fbbf24;
+      background: linear-gradient(90deg, #831843 0%, #be185d 50%, #701a75 100%);
+      color: #fde047;
       font-weight: 800;
       font-size: 13.5px;
       text-transform: uppercase;
       letter-spacing: 0.8px;
       padding: 13px 14px;
-      border-bottom: 2.5px solid #fbbf24;
+      border-bottom: 2.5px solid #fde047;
       text-align: left;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
     }
     table.sched-table thead th.c-center { text-align: center; }
 
     table.sched-table tbody tr {
-      border-bottom: 1px solid rgba(227, 35, 47, 0.25);
+      border-bottom: 1px solid rgba(236, 72, 153, 0.28);
     }
     table.sched-table tbody tr:last-child { border-bottom: none; }
 
     table.sched-table tbody tr.row-match {
-      background: rgba(255, 247, 243, 0.97);
-      color: #1d3a6e;
+      background: linear-gradient(90deg, #ffffff 0%, #fdf2f8 100%);
+      color: #1e1b4b;
     }
     table.sched-table tbody tr.row-info {
-      background: rgba(38, 6, 16, 0.92);
-      color: #f1f5f9;
+      background: rgba(56, 7, 44, 0.92);
+      color: #fdf4ff;
     }
     table.sched-table tbody tr.row-interval {
-      background: rgba(24, 3, 10, 0.85);
-      color: #cbd5e1;
+      background: rgba(31, 3, 24, 0.88);
+      color: #f5d0fe;
       font-style: italic;
     }
     table.sched-table tbody tr.row-lunch {
       background: linear-gradient(90deg, #facc15 0%, #fbbf24 50%, #f59e0b 100%);
-      color: #17020a;
+      color: #1f0318;
       font-weight: 900;
       font-style: italic;
     }
     table.sched-table tbody tr.row-finals {
       background: linear-gradient(90deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
-      color: #7c2d12;
+      color: #701a75;
       font-weight: 800;
-      border-top: 2px solid #f59e0b;
-      border-bottom: 2px solid #f59e0b;
+      border-top: 2.5px solid #f59e0b;
+      border-bottom: 2.5px solid #f59e0b;
     }
 
     table.sched-table td {
@@ -189,44 +196,47 @@
 
     .code-pill {
       display: inline-block;
-      background: #1d3a6e;
-      color: #fff;
+      background: linear-gradient(135deg, #311042 0%, #1e1b4b 100%);
+      color: #fdf4ff;
+      border: 1.5px solid #ec4899;
       border-radius: 999px;
       padding: 4px 12px;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.4px;
       text-transform: uppercase;
+      box-shadow: 0 2px 6px rgba(219, 39, 119, 0.25);
     }
     .row-finals .code-pill {
-      background: #b91c1c;
-      color: #fbbf24;
-      border: 1.5px solid #7f1d1d;
+      background: linear-gradient(135deg, #be185d 0%, #831843 100%);
+      color: #fde047;
+      border: 1.5px solid #701a75;
     }
     .fmt-badge {
       display: inline-block;
-      background: #e3232f;
+      background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
       color: #fff;
       border-radius: 8px;
       padding: 3px 10px;
       font-size: 12px;
       font-weight: 800;
-      box-shadow: 0 2px 0 #991b1b;
+      box-shadow: 0 2px 0 #831843;
     }
     .row-finals .fmt-badge {
-      background: #1d3a6e;
-      color: #fbbf24;
-      box-shadow: 0 2px 0 #0f172a;
+      background: #311042;
+      color: #fde047;
+      box-shadow: 0 2px 0 #1e1b4b;
     }
     .vs-pill {
       display: inline-block;
-      background: #e3232f;
+      background: linear-gradient(180deg, #ec4899 0%, #be185d 100%);
       color: #fff;
       font-size: 11px;
       font-weight: 900;
       padding: 2px 7px;
       border-radius: 6px;
       margin: 0 6px;
+      box-shadow: 0 1px 4px rgba(190, 24, 93, 0.4);
     }
     .sub-line {
       display: block;
