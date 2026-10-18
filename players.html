@@ -1,429 +1,143 @@
-<html xmlns:o="urn:schemas-microsoft-com:office:office"
+﻿<html xmlns:o="urn:schemas-microsoft-com:office:office"
       xmlns:w="urn:schemas-microsoft-com:office:word"
-      xmlns="http://www.w3.org/TR/REC-html40"
-      lang="en">
+      xmlns="http://www.w3.org/TR/REC-html40" lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Players Name List — Team Hashira ML Tryout 2026</title>
-  <!--[if gte mso 9]>
-  <xml>
-    <w:WordDocument>
-      <w:View>Print</w:View>
-      <w:Zoom>100</w:Zoom>
-      <w:DoNotOptimizeForBrowser/>
-    </w:WordDocument>
-  </xml>
-  <![endif]-->
-  <style>
-    @page {
-      size: A4 portrait;
-      margin: 12mm 14mm;
-    }
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    body {
-      font-family: 'Times New Roman', Times, serif;
-      background: #ffffff;
-      color: #000000;
-      padding: 16px 0;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Players Name List — Team Hashira ML Tryout 2026</title>
+<!--[if gte mso 9]>
+<xml><w:WordDocument><w:View>Print</w:View><w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml>
+<![endif]-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4 portrait; margin: 15mm 15mm 15mm 15mm; }
+  @page Section1 { size: 595.3pt 841.9pt; margin: 42pt 42pt 42pt 42pt; }
+  div.Section1 { page: Section1; }
+  * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  body { font-family: 'Times New Roman', Times, serif; color: #000; background: #fff; margin: 0; padding: 16px 0; }
 
-    /* Screen-only toolbar */
-    .toolbar {
-      max-width: 780px;
-      margin: 0 auto 16px auto;
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      font-family: Arial, sans-serif;
-    }
-    .btn {
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border: 1.5px solid #000000;
-      background: #ffffff;
-      color: #000000;
-      cursor: pointer;
-      text-decoration: none;
-    }
-    .btn:hover {
-      background: #000000;
-      color: #ffffff;
-    }
+  .toolbar { max-width: 760px; margin: 0 auto 16px; display: flex; justify-content: center; gap: 12px; font-family: Arial, sans-serif; }
+  .btn { font-size: 12px; font-weight: 700; text-transform: uppercase; padding: 8px 18px; border: 1.5px solid #000; background: #fff; color: #000; cursor: pointer; text-decoration: none; }
+  .btn:hover { background: #000; color: #fff; }
 
-    .sheet {
-      max-width: 780px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 0 8px;
-      border: none;
-    }
+  .sheet { max-width: 760px; margin: 0 auto; }
+  .page-block { page-break-inside: avoid; break-inside: avoid; }
+  .page-gap { height: 28px; }
 
-    .page-block {
-      width: 100%;
-    }
-    .page-break {
-      page-break-before: always;
-      break-before: page;
-      margin-top: 28px;
-    }
+  table.roster { width: 100%; border-collapse: collapse; table-layout: fixed;
+    border: 1.5pt solid #000; mso-border-alt: solid #000 1.5pt; }
+  table.roster th {
+    font-family: 'Times New Roman', Times, serif; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+    text-align: center; vertical-align: middle; height: 26pt; padding: 0 6pt;
+    border: 1.5pt solid #000; mso-border-alt: solid #000 1.5pt; background: #fff; color: #000; }
+  table.roster td {
+    font-family: 'Times New Roman', Times, serif; font-size: 11pt; color: #000;
+    height: 24pt; padding: 0 8pt; vertical-align: middle;
+    border: 1pt solid #000; mso-border-alt: solid #000 1pt; }
+  table.roster tr { page-break-inside: avoid; }
+  .c-name { width: 32%; text-align: left; }
+  .c-id   { width: 20%; }
+  .c-team { width: 24%; }
+  .c-sig  { width: 24%; }
 
-    /* Simple Black & White Grid Table matching user's exact reference image */
-    table.roster-table {
-      width: 100%;
-      border-collapse: collapse;
-      border: 1.5pt solid #000000;
-      mso-border-alt: solid #000000 1pt;
-      mso-padding-alt: 4pt 8pt 4pt 8pt;
-    }
-    table.roster-table th {
-      background: #ffffff;
-      color: #000000;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 13pt;
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 6pt 8pt;
-      border: 1.5pt solid #000000;
-      mso-border-alt: solid #000000 1.5pt;
-    }
-    table.roster-table td {
-      background: #ffffff;
-      color: #000000;
-      font-family: 'Times New Roman', Times, serif;
-      font-size: 12pt;
-      padding: 5pt 8pt;
-      border: 1pt solid #000000;
-      mso-border-alt: solid #000000 1pt;
-      vertical-align: middle;
-    }
-    table.roster-table td.col-name {
-      width: 34%;
-      text-align: left;
-    }
-    table.roster-table td.col-id {
-      width: 21%;
-      text-align: center;
-    }
-    table.roster-table td.col-team {
-      width: 23%;
-      text-align: center;
-      font-weight: bold;
-      font-size: 12pt;
-      text-transform: uppercase;
-      vertical-align: middle;
-      border: 1.5pt solid #000000;
-      mso-border-alt: solid #000000 1.5pt;
-    }
-    table.roster-table td.col-sig {
-      width: 22%;
-      text-align: center;
-    }
+  /* Team name cell — magenta style like the reference */
+  table.roster td.team {
+    text-align: center; vertical-align: middle; background: #fdf2f8; mso-shading: #fdf2f8;
+    border: 1.5pt solid #000; mso-border-alt: solid #000 1.5pt; padding: 0 6pt; }
+  .t-name { display: block; font-family: 'Montserrat', 'Arial Black', Arial, sans-serif; font-size: 12pt; font-weight: 900;
+    color: #9d174d; text-transform: uppercase; letter-spacing: 0.3pt; line-height: 1.2; }
+  .t-match { display: block; font-family: 'Montserrat', Arial, sans-serif; font-size: 8.5pt; font-weight: 800;
+    color: #9d174d; text-transform: uppercase; margin-top: 2pt; }
 
-    /* Slightly thicker divider line between different teams */
-    table.roster-table tr.team-end td {
-      border-bottom: 1.5pt solid #000000;
-      mso-border-bottom-alt: solid #000000 1.5pt;
-    }
+  /* thicker line between teams */
+  table.roster tr.end td { border-bottom: 1.5pt solid #000; mso-border-bottom-alt: solid #000 1.5pt; }
 
-    @media print {
-      body {
-        padding: 0;
-      }
-      .toolbar {
-        display: none !important;
-      }
-      .sheet {
-        max-width: 100%;
-        padding: 0;
-      }
-      .page-break {
-        margin-top: 0;
-      }
-    }
-  </style>
+  @media print {
+    body { padding: 0; }
+    .toolbar, .page-gap { display: none !important; }
+    .sheet { max-width: 100%; }
+  }
+</style>
 </head>
 <body>
+<div class="toolbar">
+  <a class="btn" href="index.html">Back to Bracket &amp; Schedule</a>
+  <button type="button" class="btn" onclick="window.print()">Print / Save as PDF</button>
+</div>
 
-  <div class="toolbar">
-    <a class="btn" href="index.html">Back to Bracket &amp; Schedule</a>
-    <button type="button" class="btn" onclick="window.print()">Print / Save as PDF</button>
-  </div>
+<div class="sheet Section1">
 
-  <div class="sheet">
+<!-- ===================== PAGE 1 : TEAMS 1–4 ===================== -->
+<div class="page-block">
+<table class="roster" border="1" cellspacing="0" cellpadding="0">
+  <colgroup><col class="c-name"><col class="c-id"><col class="c-team"><col class="c-sig"></colgroup>
+  <thead><tr><th>PLAYERS NAME</th><th>ID</th><th>TEAM NAME</th><th>SIGNATURE</th></tr></thead>
+  <tbody>
+    <tr><td>1. Symon Bahoy</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">TEAM TARA S</span><span class="t-match">MATCH 1 (CCJE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Anthony Antones</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Ralph Arcenue</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Jhon Lawrence Alegre</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. Jesrelle Ardin Guianan</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-    <!-- PAGE 1: TEAMS 1 TO 4 -->
-    <div class="page-block">
-      <table class="roster-table" border="1" cellspacing="0" cellpadding="6">
-        <thead>
-          <tr>
-            <th>PLAYERS NAME</th>
-            <th>ID</th>
-            <th>TEAM NAME</th>
-            <th>SIGNATURE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- 1. TEAM TARA S -->
-          <tr>
-            <td class="col-name">1. Symon Bahoy</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">TEAM TARA S</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Anthony Antones</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Ralph Arcenue</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Jhon Lawrence Alegre</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. Jesrelle Ardin Guianan</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+    <tr><td>1. Nathaniel Bernal</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">CASH OUT</span><span class="t-match">MATCH 1 (CITE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Arvin Marco</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Mark Jovic Bocalig</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. John Paulo Lim</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. Cjay Piquero</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-          <!-- 2. CASH OUT -->
-          <tr>
-            <td class="col-name">1. Nathaniel Bernal</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">CASH OUT</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Arvin Marco</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Mark Jovic Bocalig</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. John Paulo Lim</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. Cjay Piquero</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+    <tr><td>1. Mico Bercasio</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">TEAM KULUKOYS</span><span class="t-match">MATCH 2 (CCJE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Jerome Gelio</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. James Matienzo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Charles Gabriel Berjuega</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. Jayson Leron</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-          <!-- 3. TEAM KULUKOYS -->
-          <tr>
-            <td class="col-name">1. Mico Bercasio</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">TEAM KULUKOYS</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Jerome Gelio</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. James Matienzo</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Charles Gabriel Berjuega</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. Jayson Leron</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+    <tr><td>1. Victor Camacho</td><td>&nbsp;</td><td class="team" rowspan="6"><span class="t-name">TEAM JORTS</span><span class="t-match">MATCH 2 (CITE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Sharif Hasim</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Jade Estevez</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Keneth Elamparo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>5. Kenneth John Cardel</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>6. Matthew Ashton Tubieron</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  </tbody>
+</table>
+</div>
 
-          <!-- 4. TEAM JORTS -->
-          <tr>
-            <td class="col-name">1. Victor Camacho</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="6">TEAM JORTS</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Sharif Hasim</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Jade Estevez</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Keneth Elamparo</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">5. Kenneth John Cardel</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">6. Matthew Ashton Tubieron</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<div class="page-gap"></div>
+<br clear="all" style="page-break-before:always; mso-break-type:page-break" />
 
-    <!-- PAGE 2: TEAMS 5 TO 8 -->
-    <div class="page-block page-break">
-      <table class="roster-table" border="1" cellspacing="0" cellpadding="6">
-        <thead>
-          <tr>
-            <th>PLAYERS NAME</th>
-            <th>ID</th>
-            <th>TEAM NAME</th>
-            <th>SIGNATURE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- 5. TEAM LOMBROSO -->
-          <tr>
-            <td class="col-name">1. Chona Sena</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">TEAM LOMBROSO</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Charish Jimenez</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Khatte Palermo</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Maureen Marinay</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. Lyka Andes</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+<!-- ===================== PAGE 2 : TEAMS 5–8 ===================== -->
+<div class="page-block">
+<table class="roster" border="1" cellspacing="0" cellpadding="0">
+  <colgroup><col class="c-name"><col class="c-id"><col class="c-team"><col class="c-sig"></colgroup>
+  <thead><tr><th>PLAYERS NAME</th><th>ID</th><th>TEAM NAME</th><th>SIGNATURE</th></tr></thead>
+  <tbody>
+    <tr><td>1. Chona Sena</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">TEAM LOMBROSO</span><span class="t-match">MATCH 3 (CCJE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Charish Jimenez</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Khatte Palermo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Maureen Marinay</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. Lyka Andes</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-          <!-- 6. ALA KANIN JAN BUSSENG -->
-          <tr>
-            <td class="col-name">1. Jed Barbastro</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="6">ALA KANIN JAN BUSSENG</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Harvy Hicap</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Zyrksui Piojo</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Harry Bermundo</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">5. Kimbert Bron</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">6. Justin Jeremy Berdin</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+    <tr><td>1. Jed Barbastro</td><td>&nbsp;</td><td class="team" rowspan="6"><span class="t-name">ALA KANIN JAN BUSSENG</span><span class="t-match">MATCH 3 (CITE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Harvy Hicap</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Zyrksui Piojo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Harry Bermundo</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>5. Kimbert Bron</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>6. Justin Jeremy Berdin</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-          <!-- 7. PALUBOG 1 -->
-          <tr>
-            <td class="col-name">1. Aaron Macasinag</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">PALUBOG 1</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Ivan Jay Vibal</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. Larry Sapaula</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Beyonce Barajas</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. Kirsten Jon Eareck Agao</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
+    <tr><td>1. Aaron Macasinag</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">PALUBOG 1</span><span class="t-match">MATCH 4 (CITE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Ivan Jay Vibal</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. Larry Sapaula</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Beyonce Barajas</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. Kirsten Jon Eareck Agao</td><td>&nbsp;</td><td>&nbsp;</td></tr>
 
-          <!-- 8. PALUBOG 2 -->
-          <tr>
-            <td class="col-name">1. Mark Josef Corral</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-team" rowspan="5">PALUBOG 2</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">2. Jay Andrew Alcera</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">3. John Carlo Bitara</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="col-name">4. Jhon Dave Carl Arquero</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-          <tr class="team-end">
-            <td class="col-name">5. John Prencipe</td>
-            <td class="col-id">&nbsp;</td>
-            <td class="col-sig">&nbsp;</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <tr><td>1. Mark Josef Corral</td><td>&nbsp;</td><td class="team" rowspan="5"><span class="t-name">PALUBOG 2</span><span class="t-match">MATCH 4 (CITE)</span></td><td>&nbsp;</td></tr>
+    <tr><td>2. Jay Andrew Alcera</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>3. John Carlo Bitara</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr><td>4. Jhon Dave Carl Arquero</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    <tr class="end"><td>5. John Prencipe</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+  </tbody>
+</table>
+</div>
 
-  </div>
-
+</div>
 </body>
 </html>
