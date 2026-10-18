@@ -4,510 +4,329 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>THE FINAL SELECTION - Team Hashira Mobile Legends Try Out</title>
-  <!-- Open Graph Meta Tags for Facebook & Messenger Preview -->
   <meta property="og:title" content="THE FINAL SELECTION - Team Hashira MLBB Bracket">
-  <meta property="og:description" content="Official Mobile Legends Try-Out Tournament Bracket & Live Viewer">
+  <meta property="og:description" content="Official Team Hashira Mobile Legends Try-Out Tournament Bracket">
   <meta property="og:type" content="website">
-  <meta name="description" content="Official Mobile Legends Try-Out Tournament Bracket for Team Hashira">
+  <meta name="description" content="Official Team Hashira Mobile Legends Try-Out Tournament Bracket">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Montserrat:ital,wght@0,600;0,700;0,800;1,800;1,900&display=swap" rel="stylesheet">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      user-select: none;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #0c0105; }
     body {
-      background-color: #0d0105;
       font-family: 'Montserrat', sans-serif;
+      color: #fff;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: #fff;
-      padding: 10px;
-      overflow-x: auto;
-    }
-    
-    .toolbar {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 10px;
-      align-items: center;
-    }
-    .btn {
-      background: #e11d48;
-      color: #fff;
-      border: none;
-      padding: 8px 18px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      transition: background 0.2s, transform 0.1s;
-    }
-    .btn:hover {
-      background: #be123c;
-      transform: translateY(-1px);
-    }
-    .btn-secondary {
-      background: #334155;
-    }
-    .btn-secondary:hover {
-      background: #1e293b;
+      padding: 12px 0;
+      overflow-x: hidden;
     }
 
-    /* Exact Canvas Viewport: 1600 x 900 */
-    .bracket-canvas {
-      position: relative;
-      width: 1600px;
-      height: 900px;
-      background: radial-gradient(ellipse at 50% 50%, #300412 0%, #170107 65%, #0a0104 100%);
-      border: 1px solid #4a0615;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95);
+    /* Wrapper that gets resized to the scaled stage size */
+    #frame { position: relative; }
+
+    /* Design stage: 2000 x 1080 (2x of a 1000 x 540 layout) */
+    #stage {
+      position: absolute;
+      top: 0; left: 0;
+      width: 2000px;
+      height: 1080px;
+      transform-origin: 0 0;
       overflow: hidden;
-      flex-shrink: 0;
+      border-radius: 6px;
+      background:
+        linear-gradient(158deg, transparent 0 60%, rgba(150, 14, 32, .45) 60% 63%, transparent 63% 100%),
+        linear-gradient(158deg, transparent 0 66%, rgba(120, 10, 26, .35) 66% 74%, transparent 74% 100%),
+        linear-gradient(22deg,  transparent 0 72%, rgba(160, 16, 36, .40) 72% 76%, transparent 76% 100%),
+        linear-gradient(22deg,  transparent 0 78%, rgba(110, 8, 24, .35) 78% 88%, transparent 88% 100%),
+        linear-gradient(200deg, transparent 0 44%, rgba(90, 6, 20, .45) 44% 52%, transparent 52% 100%),
+        linear-gradient(-30deg, transparent 0 18%, rgba(140, 12, 30, .30) 18% 26%, transparent 26% 100%),
+        radial-gradient(ellipse at 25% 25%, rgba(70, 6, 22, .9) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 85%, rgba(90, 8, 26, .8) 0%, transparent 50%),
+        #17020a;
     }
 
-    /* Checkered Flags */
-    .flag-svg {
-      position: absolute;
-      top: 25px;
-      width: 125px;
-      height: 85px;
-      opacity: 0.95;
+    svg.lines {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
     }
-    .flag-left { left: 35px; }
-    .flag-right { right: 35px; }
+    svg.lines path { stroke: #d7d2d4; stroke-width: 1.1; fill: none; }
 
-    /* Top Headers */
-    .header-group {
-      position: absolute;
-      top: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
+    /* Headers */
+    .title {
+      position: absolute; left: 0; right: 0; text-align: center;
+      font-family: 'League Spartan', sans-serif; font-weight: 800;
+      font-size: 76px; letter-spacing: 1px; line-height: 1; color: #fff;
+      top: 52px;
+      text-shadow: 0 4px 14px rgba(0,0,0,.6);
     }
-    .header-group h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 3.1rem;
-      letter-spacing: 2px;
+    .subtitle {
+      position: absolute; left: 0; right: 0; text-align: center;
+      top: 124px; font-weight: 900; font-style: italic;
+      font-size: 34px; color: #fbbf24; letter-spacing: .5px;
+    }
+    .tryout {
+      position: absolute; left: 0; right: 0; text-align: center;
+      top: 170px; font-weight: 800; font-size: 28px; color: #fff;
+    }
+    .section {
+      position: absolute; top: 210px;
+      font-weight: 900; font-style: italic; font-size: 36px; color: #fbbf24;
+    }
+    .label {
+      position: absolute; transform: translate(-50%, -50%);
+      font-weight: 800; font-size: 26px; color: #fff; white-space: nowrap;
+      text-align: center; line-height: 1.1;
+    }
+    .mlabel {
+      position: absolute; transform: translate(-50%, -50%);
+      font-weight: 800; font-size: 17px; color: #ffffff; z-index: 4;
+      pointer-events: none;
+    }
+
+    /* Match boxes */
+    .box {
+      position: absolute;
+      background: #fff7f3;
+      border: 3px solid #e3232f;
+      border-radius: 16px;
+      box-shadow: -6px 4px 0 #a1141f, 6px 4px 0 #a1141f, 0 6px 14px rgba(0,0,0,.45);
+      color: #1d3a6e;
       font-weight: 700;
-      color: #ffffff;
-      text-transform: uppercase;
+      font-size: 17px;
       line-height: 1.1;
-      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.8);
-    }
-    .header-group .sub-title {
-      color: #fbbf24;
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      margin-top: 4px;
       text-transform: uppercase;
-    }
-    .header-group .try-out {
-      color: #ffffff;
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 2px;
-      margin-top: 2px;
-      text-transform: uppercase;
-    }
-
-    /* Bracket Section Titles */
-    .section-title {
-      position: absolute;
-      font-style: italic;
-      font-weight: 800;
-      font-size: 1.5rem;
-      letter-spacing: 1.5px;
-      color: #f59e0b;
-      text-transform: uppercase;
-      z-index: 10;
-    }
-    .title-upper { top: 155px; left: 80px; }
-    .title-lower { top: 155px; right: 80px; }
-
-    /* Round Format Indicators */
-    .round-tag {
-      position: absolute;
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #ffffff;
-      text-transform: uppercase;
-      z-index: 10;
+      display: flex; align-items: center; justify-content: center;
       text-align: center;
-    }
-
-    /* Match Box Capsule */
-    .capsule {
-      position: absolute;
-      width: 140px;
-      height: 38px;
-      background: #ffffff;
-      border: 2px solid #ef4444;
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2px 10px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #0f172a;
-      line-height: 1.15;
-      text-transform: uppercase;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      z-index: 5;
-      cursor: text;
+      padding: 0 10px;
+      z-index: 3;
       outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .capsule:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 12px rgba(59, 130, 246, 0.85);
-      background: #fff;
-    }
-    .capsule.small-font {
-      font-size: 0.58rem;
-      line-height: 1.05;
-      padding: 2px 6px;
-    }
+    .box.small { font-size: 14px; text-transform: none; }
+    .box.winner { border-color: #fbbf24; box-shadow: -6px 4px 0 #b45309, 6px 4px 0 #b45309, 0 0 24px rgba(251,191,36,.55); }
+    body.edit .box { cursor: text; }
+    body.edit .box:focus { border-color: #3b82f6; }
 
-    /* Match Identifier (M1, M2, M3, M4) */
-    .match-label {
-      position: absolute;
-      font-size: 0.75rem;
-      font-weight: 800;
-      color: #e2e8f0;
-      width: 40px;
-      text-align: center;
-      transform: translateX(-50%);
-      z-index: 6;
-      pointer-events: none;
-    }
+    .flag { position: absolute; top: 28px; width: 160px; height: 140px; }
 
-    /* Grand Finals Center Area */
-    .trophy-section {
-      position: absolute;
-      top: 285px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      z-index: 10;
-    }
-    .trophy-text {
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-      text-align: center;
-      line-height: 1.2;
-    }
-    .trophy-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .trophy-icon-svg {
-      width: 38px;
-      height: 38px;
-      fill: #ffffff;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    }
-    .champ-capsule {
-      width: 145px;
-      height: 38px;
-    }
+    .note { margin-top: 10px; font-size: 13px; color: #94a3b8; text-align: center; padding: 0 12px; }
+    .toolbar { display: none; gap: 10px; margin-bottom: 10px; }
+    body.edit .toolbar { display: flex; }
+    .btn { background: #e11d48; color: #fff; border: 0; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+    .btn.gray { background: #334155; }
 
-    .vs-container {
-      position: absolute;
-      top: 565px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      z-index: 10;
-    }
-    .vs-text {
-      font-size: 1.15rem;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1;
-    }
-    .bo5-text {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-top: 14px;
-    }
-
-    /* SVG Connecting Lines */
-    .connector-svg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 2;
-    }
-    .connector-svg path {
-      stroke: #ffffff;
-      stroke-width: 2;
-      fill: none;
-      stroke-linecap: square;
-    }
-
-    .footer-note {
-      margin-top: 10px;
-      font-size: 0.85rem;
-      color: #94a3b8;
-      text-align: center;
+    @media print {
+      body { padding: 0; }
+      .note, .toolbar { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Controls -->
   <div class="toolbar">
-    <button class="btn" onclick="window.print()">🖨️ Print / Save as PDF</button>
-    <button class="btn btn-secondary" onclick="resetDefaultTeams()">🔄 Reset Default Teams</button>
+    <button class="btn" onclick="window.print()">🖨️ Print / PDF</button>
+    <button class="btn gray" onclick="resetLocal()">🔄 Reset Local Edits</button>
   </div>
 
-  <!-- Main Canvas -->
-  <div class="bracket-canvas" id="canvas">
-
-    <!-- Top Left Checkered Flag -->
-    <svg class="flag-svg flag-left" viewBox="0 0 100 70">
-      <defs>
-        <pattern id="checkerPattern" width="20" height="20" patternUnits="userSpaceOnUse">
-          <rect width="10" height="10" fill="#ffffff" />
-          <rect x="10" width="10" height="10" fill="#0d0105" />
-          <rect y="10" width="10" height="10" fill="#0d0105" />
-          <rect x="10" y="10" width="10" height="10" fill="#ffffff" />
-        </pattern>
-      </defs>
-      <polygon points="5,5 95,20 85,65 0,50" fill="url(#checkerPattern)" stroke="#ffffff" stroke-width="1.5"/>
-    </svg>
-
-    <!-- Top Right Checkered Flag -->
-    <svg class="flag-svg flag-right" viewBox="0 0 100 70">
-      <polygon points="95,5 5,20 15,65 100,50" fill="url(#checkerPattern)" stroke="#ffffff" stroke-width="1.5"/>
-    </svg>
-
-    <!-- Main Header -->
-    <div class="header-group">
-      <h1>THE FINAL SELECTION</h1>
-      <div class="sub-title">TEAM HASHIRA MOBILE LEGENDS</div>
-      <div class="try-out">TRY OUT</div>
-    </div>
-
-    <!-- Section Titles -->
-    <div class="section-title title-upper">UPPER BRACKET</div>
-    <div class="section-title title-lower">LOWER BRACKET</div>
-
-    <!-- Upper Bracket Round Tags -->
-    <div class="round-tag" style="top: 220px; left: 120px;">BO1</div>
-    <div class="round-tag" style="top: 295px; left: 300px;">BO3</div>
-    <div class="round-tag" style="top: 450px; left: 450px;">BO3</div>
-
-    <!-- Lower Bracket Round Tags -->
-    <div class="round-tag" style="top: 220px; right: 120px;">BO1</div>
-    <div class="round-tag" style="top: 305px; right: 290px;">BO1</div>
-    <div class="round-tag" style="top: 445px; right: 435px;">BO1</div>
-    <div class="round-tag" style="top: 455px; right: 605px;">BO3</div>
-
-    <!-- ========================================================= -->
-    <!-- GRAND FINALS (CENTER) -->
-    <!-- ========================================================= -->
-
-    <!-- Trophy & Representative Box -->
-    <div class="trophy-section">
-      <div class="trophy-text">FINAL TEAM<br>REPRESENTATIVE</div>
-      <div class="trophy-row">
-        <!-- Exact Trophy Vector Icon -->
-        <svg class="trophy-icon-svg" viewBox="0 0 24 24">
-          <path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1c1.97-.47 3.5-2.07 3.61-4.06C19.08 11.53 21 9.45 21 7V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/>
-        </svg>
-        <div class="capsule champ-capsule" contenteditable="true" id="champ_name"></div>
-      </div>
-    </div>
-
-    <!-- Center VS and BO5 Label -->
-    <div class="vs-container">
-      <div class="vs-text">VS</div>
-      <div class="bo5-text">BO5</div>
-    </div>
-
-    <!-- Grand Finals Matchup Boxes -->
-    <!-- Upper Champion (Left Box) -->
-    <div class="capsule" style="top: 555px; left: 605px;" contenteditable="true" id="gf_upper"></div>
-    <!-- Lower Champion (Right Box) -->
-    <div class="capsule" style="top: 555px; right: 605px;" contenteditable="true" id="gf_lower"></div>
-
-
-    <!-- ========================================================= -->
-    <!-- UPPER BRACKET (LEFT SIDE) -->
-    <!-- ========================================================= -->
-
-    <!-- Upper Col 1: Round 1 (BO1) -->
-    <!-- Match 1 -->
-    <div class="capsule" style="top: 270px; left: 50px;" contenteditable="true" id="ub_m1_t1">TEAM TARA S</div>
-    <div class="match-label" style="top: 318px; left: 120px;">M1</div>
-    <div class="capsule" style="top: 335px; left: 50px;" contenteditable="true" id="ub_m1_t2">CASH OUT</div>
-
-    <!-- Match 3 -->
-    <div class="capsule" style="top: 415px; left: 50px;" contenteditable="true" id="ub_m3_t1">TEAM LOBROSO</div>
-    <div class="match-label" style="top: 463px; left: 120px;">M3</div>
-    <div class="capsule small-font" style="top: 480px; left: 50px;" contenteditable="true" id="ub_m3_t2">ALA KANIN JAN BUSSENG</div>
-
-    <!-- Match 2 -->
-    <div class="capsule" style="top: 590px; left: 50px;" contenteditable="true" id="ub_m2_t1">TEAM LULOKOYS</div>
-    <div class="match-label" style="top: 638px; left: 120px;">M2</div>
-    <div class="capsule" style="top: 655px; left: 50px;" contenteditable="true" id="ub_m2_t2">TEAM JORTS</div>
-
-    <!-- Match 4 -->
-    <div class="capsule" style="top: 735px; left: 50px;" contenteditable="true" id="ub_m4_t1">PALUBOG 1</div>
-    <div class="match-label" style="top: 783px; left: 120px;">M4</div>
-    <div class="capsule" style="top: 800px; left: 50px;" contenteditable="true" id="ub_m4_t2">PALUBOG 2</div>
-
-    <!-- Upper Col 2: Round 2 (BO3) -->
-    <div class="capsule" style="top: 345px; left: 235px;" contenteditable="true"></div>
-    <div class="capsule" style="top: 405px; left: 235px;" contenteditable="true"></div>
-
-    <div class="capsule" style="top: 665px; left: 235px;" contenteditable="true"></div>
-    <div class="capsule" style="top: 725px; left: 235px;" contenteditable="true"></div>
-
-    <!-- Upper Col 3: Upper Finals (BO3) -->
-    <div class="capsule" style="top: 485px; left: 395px;" contenteditable="true"></div>
-    <div class="capsule" style="top: 545px; left: 395px;" contenteditable="true"></div>
-
-
-    <!-- ========================================================= -->
-    <!-- LOWER BRACKET (RIGHT SIDE) -->
-    <!-- ========================================================= -->
-
-    <!-- Lower Col 1: Far Right (BO1) -->
-    <!-- Pair 1: L1 vs L3 -->
-    <div class="capsule" style="top: 295px; right: 50px;" contenteditable="true">L1</div>
-    <div class="capsule" style="top: 355px; right: 50px;" contenteditable="true">L3</div>
-
-    <!-- Pair 2: L2 vs L4 -->
-    <div class="capsule" style="top: 445px; right: 50px;" contenteditable="true">L2</div>
-    <div class="capsule" style="top: 505px; right: 50px;" contenteditable="true">L4</div>
-
-    <!-- Lower Col 2: Middle Right (BO1) -->
-    <!-- Top Pair (Winner L1/L3 vs Winner L2/L4) -->
-    <div class="capsule" style="top: 370px; right: 220px;" contenteditable="true"></div>
-    <div class="capsule" style="top: 430px; right: 220px;" contenteditable="true"></div>
-
-    <!-- Bottom Pair (L5 vs L6) -->
-    <div class="capsule" style="top: 585px; right: 200px;" contenteditable="true">L5</div>
-    <div class="capsule" style="top: 645px; right: 200px;" contenteditable="true">L6</div>
-
-    <!-- Lower Col 3: Inner Right (BO1) -->
-    <div class="capsule" style="top: 485px; right: 375px;" contenteditable="true"></div>
-    <div class="capsule" style="top: 545px; right: 375px;" contenteditable="true"></div>
-
-    <!-- Lower Col 4: Lower Finals (BO3) -->
-    <div class="capsule" style="top: 520px; right: 535px;" contenteditable="true"></div>
-    <div class="capsule small-font" style="top: 580px; right: 535px;" contenteditable="true">L IN Match 7 of BO3 UPPER BRACKET</div>
-
-
-    <!-- ========================================================= -->
-    <!-- SVG CONNECTING LINES (EXACT REPRODUCTION) -->
-    <!-- ========================================================= -->
-    <svg class="connector-svg">
-      <!-- Upper M1 bracket to Round 2 Top Box -->
-      <path d="M 190 289 H 212 V 364 H 235" />
-      <path d="M 190 354 H 212" />
-
-      <!-- Upper M3 bracket to Round 2 Bottom Box -->
-      <path d="M 190 434 H 212 V 424 H 235" />
-      <path d="M 190 499 H 212" />
-
-      <!-- Upper Round 2 Top Pair to Upper Final Top Box -->
-      <path d="M 375 364 H 385 V 504 H 395" />
-      <path d="M 375 424 H 385" />
-
-      <!-- Upper M2 bracket to Round 2 Top Box -->
-      <path d="M 190 609 H 212 V 684 H 235" />
-      <path d="M 190 674 H 212" />
-
-      <!-- Upper M4 bracket to Round 2 Bottom Box -->
-      <path d="M 190 754 H 212 V 744 H 235" />
-      <path d="M 190 819 H 212" />
-
-      <!-- Upper Round 2 Bottom Pair to Upper Final Bottom Box -->
-      <path d="M 375 684 H 385 V 564 H 395" />
-      <path d="M 375 744 H 385" />
-
-      <!-- Upper Final Pair to Left Grand Finals Box -->
-      <path d="M 535 504 H 570 V 574 H 605" />
-      <path d="M 535 564 H 570" />
-
-      <!-- Grand Finals Stems meeting in Center & Going Up to Trophy -->
-      <path d="M 745 574 H 800 V 355" />
-      <path d="M 855 574 H 800" />
-
-      <!-- Lower Bracket: L1/L3 to Col 2 Top Box -->
-      <path d="M 1410 314 H 1385 V 389 H 1360" />
-      <path d="M 1410 374 H 1385" />
-
-      <!-- Lower Bracket: L2/L4 to Col 2 Bottom Box -->
-      <path d="M 1410 464 H 1385 V 449 H 1360" />
-      <path d="M 1410 524 H 1385" />
-
-      <!-- Lower Bracket: Col 2 Top Pair to Col 3 Top Box -->
-      <path d="M 1220 389 H 1190 V 504 H 1165" />
-      <path d="M 1220 449 H 1190" />
-
-      <!-- Lower Bracket: L5/L6 to Col 3 Bottom Box -->
-      <path d="M 1260 604 H 1190 V 564 H 1165" />
-      <path d="M 1260 664 H 1190" />
-
-      <!-- Lower Bracket: Col 3 to Lower Finals Top Box -->
-      <path d="M 1085 504 H 1055 V 539 H 1025" />
-      <path d="M 1085 564 H 1055" />
-
-      <!-- Lower Finals to Right Grand Finals Box -->
-      <path d="M 925 539 H 885 V 574 H 855" />
-      <path d="M 925 599 H 885" />
-    </svg>
-
+  <div id="frame">
+    <div id="stage"></div>
   </div>
 
-  <div class="footer-note">
-    💡 <strong>Live Interactive Bracket:</strong> Maaari mong i-click ang anumang white box para mag-type ng score o pangalan ng nanalo habang nagaganap ang laban!
-  </div>
+  <div class="note">🏆 Team Hashira Mobile Legends Try-Out — Official Bracket</div>
 
   <script>
-    function resetDefaultTeams() {
-      if (confirm('I-reset ang bracket sa orihinal na listahan ng teams?')) {
-        document.getElementById('ub_m1_t1').innerText = 'TEAM TARA S';
-        document.getElementById('ub_m1_t2').innerText = 'CASH OUT';
-        document.getElementById('ub_m3_t1').innerText = 'TEAM LOBROSO';
-        document.getElementById('ub_m3_t2').innerText = 'ALA KANIN JAN BUSSENG';
-        document.getElementById('ub_m2_t1').innerText = 'TEAM LULOKOYS';
-        document.getElementById('ub_m2_t2').innerText = 'TEAM JORTS';
-        document.getElementById('ub_m4_t1').innerText = 'PALUBOG 1';
-        document.getElementById('ub_m4_t2').innerText = 'PALUBOG 2';
-        document.getElementById('champ_name').innerText = '';
-        document.getElementById('gf_upper').innerText = '';
-        document.getElementById('gf_lower').innerText = '';
+    /* =========================================================
+       OFFICIAL BRACKET DATA
+       Para mag-update ng resulta: palitan lang ang text sa loob
+       ng quotes (" ") tapos i-commit/push. Auto-update ang site.
+       ========================================================= */
+    const DATA = {
+      // ---- UPPER BRACKET : ROUND 1 (BO1) ----
+      u1a: "TEAM TARA S",       u1b: "CASH OUT",
+      u3a: "TEAM LOBROSO",      u3b: "ALA KANIN JAN BUSSENG",
+      u2a: "TEAM LULOKOYS",     u2b: "TEAM JORTS",
+      u4a: "PALUBOG 1",         u4b: "PALUBOG 2",
+
+      // ---- UPPER BRACKET : ROUND 2 (BO3) ----
+      s1: "", s2: "",           // Winner M1 vs Winner M3
+      s3: "", s4: "",           // Winner M2 vs Winner M4
+
+      // ---- UPPER BRACKET FINAL (BO3) ----
+      f1: "", f2: "",
+
+      // ---- GRAND FINALS (BO5) ----
+      gfL: "",                  // Upper Bracket Champion
+      gfR: "",                  // Lower Bracket Champion
+      champ: "",                // FINAL TEAM REPRESENTATIVE
+
+      // ---- LOWER BRACKET ----
+      L1: "L1", L3: "L3", L2: "L2", L4: "L4",   // Round 1 (BO1)
+      l2a: "", l2b: "",                          // Round 2 (BO1)
+      L5: "L5", L6: "L6",
+      l3a: "", l3b: "",                          // Round 3 (BO1)
+      lf1: "",                                   // Lower Final (BO3)
+      lf2: "L IN Match 7 of BO3 UPPER BRACKET"
+    };
+
+    // Highlight these box ids as winners (gold border), e.g. ["u1a","s1"]
+    const WINNERS = [];
+
+    /* ================= LAYOUT (1000 x 540 design units) ================= */
+    const U = 2; // scale to 2000 x 1080 stage
+    const H = 23;
+
+    // id: [left x, center y, width, extra class]
+    const BOXES = {
+      u1a: [42, 177, 92], u1b: [42, 207, 92],
+      u3a: [42, 259, 92], u3b: [42, 290, 92, "small"],
+      u2a: [42, 357, 92], u2b: [42, 387, 92],
+      u4a: [42, 439, 92], u4b: [42, 470, 92],
+
+      s1: [163, 219, 90], s2: [163, 249, 90],
+      s3: [163, 399, 90], s4: [163, 429, 90],
+
+      f1: [236, 309, 90], f2: [236, 339, 90],
+
+      gfL: [362, 324, 86],
+      gfR: [474, 324, 84],
+      champ: [417, 180, 86],
+
+      lf1: [583, 309, 88], lf2: [583, 340, 88, "small"],
+      l3a: [688, 291, 88], l3b: [688, 325, 88],
+      l2a: [790, 229, 88], l2b: [790, 258, 88],
+      L5:  [795, 346, 86], L6:  [795, 376, 86],
+      L1:  [898, 188, 88], L3:  [898, 217, 88],
+      L2:  [898, 269, 88], L4:  [898, 299, 88]
+    };
+
+    const LABELS = [
+      ["BO1", 88, 150], ["BO3", 210, 184], ["BO3", 283, 277],
+      ["BO1", 942, 150], ["BO1", 834, 192], ["BO1", 732, 265], ["BO3", 612, 277],
+      ["VS", 460, 326], ["BO5", 460, 352],
+      ["FINAL TEAM<br>REPRESENTATIVE", 460, 148]
+    ];
+    const MLABELS = [["M1", 88, 192], ["M3", 88, 274], ["M2", 88, 372], ["M4", 88, 455]];
+
+    // [sourceA, sourceB, target, direction]  'R' = flows right, 'L' = flows left
+    const LINKS = [
+      ["u1a", "u1b", "s1", "R"], ["u3a", "u3b", "s2", "R"],
+      ["u2a", "u2b", "s3", "R"], ["u4a", "u4b", "s4", "R"],
+      ["s1", "s2", "f1", "R"],   ["s3", "s4", "f2", "R"],
+      ["f1", "f2", "gfL", "R"],
+      ["L1", "L3", "l2a", "L"],  ["L2", "L4", "l2b", "L"],
+      ["l2a", "l2b", "l3a", "L"],["L5", "L6", "l3b", "L"],
+      ["l3a", "l3b", "lf1", "L"],["lf1", "lf2", "gfR", "L"]
+    ];
+
+    /* ================= RENDER ================= */
+    const stage = document.getElementById('stage');
+    const isEdit = new URLSearchParams(location.search).has('edit');
+    if (isEdit) document.body.classList.add('edit');
+    const local = isEdit ? JSON.parse(localStorage.getItem('hashiraBracket') || '{}') : {};
+
+    function el(tag, cls, html) {
+      const e = document.createElement(tag);
+      if (cls) e.className = cls;
+      if (html !== undefined) e.innerHTML = html;
+      stage.appendChild(e);
+      return e;
+    }
+
+    // Headers
+    el('div', 'title', 'THE FINAL SELECTION');
+    el('div', 'subtitle', 'TEAM HASHIRA MOBILE LEGENDS');
+    el('div', 'tryout', 'TRY OUT');
+    const up = el('div', 'section', 'UPPER BRACKET');   up.style.left = (42 * U) + 'px';
+    const lo = el('div', 'section', 'LOWER BRACKET');   lo.style.right = (14 * U) + 'px';
+
+    // Checkered flags
+    function flagSVG(mirror) {
+      let sq = '';
+      const n = 14;
+      for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+        if ((r + c) % 2 === 0) sq += `<rect x="${c * n}" y="${r * n}" width="${n}" height="${n}" fill="#fff"/>`;
       }
+      return `<svg class="flag" viewBox="-4 -10 66 70" style="${mirror ? 'right' : 'left'}:36px">
+        <g transform="${mirror ? 'translate(58,0) scale(-1,1) ' : ''}skewY(14) skewX(-8)">${sq}</g></svg>`;
+    }
+    stage.insertAdjacentHTML('beforeend', flagSVG(false) + flagSVG(true));
+
+    // Labels
+    LABELS.forEach(([t, x, y]) => {
+      const l = el('div', 'label', t);
+      l.style.left = (x * U) + 'px'; l.style.top = (y * U) + 'px';
+      if (t.includes('REPRESENTATIVE')) l.style.fontSize = '22px';
+    });
+    MLABELS.forEach(([t, x, y]) => {
+      const l = el('div', 'mlabel', t);
+      l.style.left = (x * U) + 'px'; l.style.top = (y * U) + 'px';
+    });
+
+    // Trophy icon
+    stage.insertAdjacentHTML('beforeend',
+      `<svg viewBox="0 0 24 24" style="position:absolute;left:${383 * U}px;top:${166 * U}px;width:${28 * U}px;height:${28 * U}px;fill:#fff">
+        <path d="M19 4h-2V2H7v2H5a2 2 0 0 0-2 2v1a5 5 0 0 0 4.4 5A5 5 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a5 5 0 0 0 3.6-3.9A5 5 0 0 0 21 7V6a2 2 0 0 0-2-2ZM5 7V6h2v4A3 3 0 0 1 5 7Zm14 0a3 3 0 0 1-2 3V6h2Z"/>
+      </svg>`);
+
+    // Boxes
+    Object.entries(BOXES).forEach(([id, [x, y, w, cls]]) => {
+      const b = el('div', 'box' + (cls ? ' ' + cls : ''));
+      b.id = id;
+      b.style.left = (x * U) + 'px';
+      b.style.top = ((y - H / 2) * U) + 'px';
+      b.style.width = (w * U) + 'px';
+      b.style.height = (H * U) + 'px';
+      b.textContent = (local[id] !== undefined ? local[id] : DATA[id]) || '';
+      if (WINNERS.includes(id)) b.classList.add('winner');
+      if (isEdit) {
+        b.contentEditable = 'true';
+        b.addEventListener('input', () => {
+          local[id] = b.textContent;
+          localStorage.setItem('hashiraBracket', JSON.stringify(local));
+        });
+      }
+    });
+
+    // Connector lines
+    const R = id => BOXES[id][0] + BOXES[id][2];
+    const Lx = id => BOXES[id][0];
+    const Y = id => BOXES[id][1];
+    let d = '';
+    LINKS.forEach(([a, b, t, dir]) => {
+      const ya = Y(a), yb = Y(b), yt = Y(t);
+      const top = Math.min(ya, yb, yt), bot = Math.max(ya, yb, yt);
+      if (dir === 'R') {
+        const sx = Math.max(R(a), R(b)), tx = Lx(t), xj = (sx + tx) / 2;
+        d += `M${R(a)} ${ya}H${xj}M${R(b)} ${yb}H${xj}M${xj} ${top}V${bot}M${xj} ${yt}H${tx}`;
+      } else {
+        const sx = Math.min(Lx(a), Lx(b)), tx = R(t), xj = (sx + tx) / 2;
+        d += `M${Lx(a)} ${ya}H${xj}M${Lx(b)} ${yb}H${xj}M${xj} ${top}V${bot}M${xj} ${yt}H${tx}`;
+      }
+    });
+    // Grand finals stem up to champion box
+    const cx = BOXES.champ[0] + BOXES.champ[2] / 2;
+    d += `M${cx} ${Y('champ') + H / 2}V${312}`;
+    stage.insertAdjacentHTML('afterbegin',
+      `<svg class="lines" viewBox="0 0 1000 540" preserveAspectRatio="none"><path d="${d}"/></svg>`);
+
+    // Responsive scaling
+    function fit() {
+      const k = Math.min((window.innerWidth - 16) / 2000, 1);
+      stage.style.transform = `scale(${k})`;
+      const f = document.getElementById('frame');
+      f.style.width = (2000 * k) + 'px';
+      f.style.height = (1080 * k) + 'px';
+    }
+    window.addEventListener('resize', fit);
+    fit();
+
+    function resetLocal() {
+      if (confirm('I-reset ang local edits?')) { localStorage.removeItem('hashiraBracket'); location.reload(); }
     }
   </script>
 </body>
