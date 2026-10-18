@@ -494,22 +494,22 @@
 
   <!-- Top Navigation Buttons -->
   <div class="nav-bar">
-    <button type="button" class="nav-btn" onclick="scrollToId('frame')">🏆 Tournament Bracket</button>
-    <button type="button" class="nav-btn" onclick="scrollToId('day1-schedule')">📅 Day 1: Upper Bracket Schedule</button>
-    <button type="button" class="nav-btn" onclick="scrollToId('day2-schedule')">🔥 Day 2: Lower Bracket &amp; Finals</button>
+    <button type="button" class="nav-btn" onclick="scrollToId('frame')">Tournament Bracket</button>
+    <button type="button" class="nav-btn" onclick="scrollToId('day1-schedule')">Day 1: Upper Bracket Schedule</button>
+    <button type="button" class="nav-btn" onclick="scrollToId('day2-schedule')">Day 2: Lower Bracket &amp; Finals</button>
   </div>
 
   <!-- Floating Zoom Controls (Mobile, Tablet, Laptop, PC) -->
   <div class="zoom-dock" aria-label="Zoom Controls">
-    <button type="button" class="z-btn" onclick="changeZoom(-0.25)" title="Zoom Out">➖</button>
-    <span id="zoom-label" class="z-pct" onclick="resetZoom()" title="Tap to Reset Zoom">100%</span>
-    <button type="button" class="z-btn" onclick="changeZoom(0.25)" title="Zoom In">➕</button>
-    <button type="button" class="z-btn z-fit" onclick="resetZoom()" title="Fit to Screen">Fit</button>
+    <button type="button" class="z-btn" onclick="changeZoom(-0.25)" title="Zoom Out">&minus;</button>
+    <span id="zoom-label" class="z-pct" onclick="resetZoom()" title="Reset Zoom">100%</span>
+    <button type="button" class="z-btn" onclick="changeZoom(0.25)" title="Zoom In">+</button>
+    <button type="button" class="z-btn z-fit" onclick="resetZoom()" title="Fit to Screen">FIT</button>
   </div>
 
   <div class="toolbar">
-    <button class="btn" onclick="window.print()">🖨️ Print / PDF</button>
-    <button class="btn gray" onclick="resetLocal()">🔄 Reset Local Edits</button>
+    <button class="btn" onclick="window.print()">Print / PDF</button>
+    <button class="btn gray" onclick="resetLocal()">Reset Local Edits</button>
   </div>
 
   <!-- =====================================================
@@ -530,7 +530,7 @@
       <div class="sched-header">
         <div class="s-title">THE FINAL SELECTION</div>
         <div class="s-sub">TEAM HASHIRA MOBILE LEGENDS — OFFICIAL MATCH SCHEDULE</div>
-        <div class="s-day">📅 DAY 1: UPPER BRACKET (Whole Day)</div>
+        <div class="s-day">DAY 1: UPPER BRACKET (Whole Day)</div>
       </div>
 
       <div class="table-wrap">
@@ -603,7 +603,7 @@
             </tr>
             <tr class="row-lunch">
               <td class="c-time">11:15 NN – 1:00 PM</td>
-              <td class="c-code">🍱 LUNCH BREAK</td>
+              <td class="c-code">LUNCH BREAK</td>
               <td class="c-details" colspan="3">OFFICIAL LUNCH BREAK (All)</td>
             </tr>
             <tr class="row-match">
@@ -661,7 +661,7 @@
       <div class="sched-header">
         <div class="s-title">THE FINAL SELECTION</div>
         <div class="s-sub">TEAM HASHIRA MOBILE LEGENDS — OFFICIAL MATCH SCHEDULE</div>
-        <div class="s-day">🔥 DAY 2: LOWER BRACKET &amp; GRAND FINALS (Whole Day)</div>
+        <div class="s-day">DAY 2: LOWER BRACKET &amp; GRAND FINALS (Whole Day)</div>
       </div>
 
       <div class="table-wrap">
@@ -748,7 +748,7 @@
             </tr>
             <tr class="row-lunch">
               <td class="c-time">11:50 AM – 1:00 PM</td>
-              <td class="c-code">🍱 LUNCH BREAK</td>
+              <td class="c-code">LUNCH BREAK</td>
               <td class="c-details" colspan="3">OFFICIAL LUNCH BREAK (All)</td>
             </tr>
             <tr class="row-match">
@@ -767,7 +767,7 @@
             </tr>
             <tr class="row-finals">
               <td class="c-time">2:20 PM – 3:50 PM</td>
-              <td class="c-code"><span class="code-pill">🏆 FINALS</span></td>
+              <td class="c-code"><span class="code-pill">FINALS</span></td>
               <td class="c-details">GRAND FINALS (Upper Champion vs Lower Champion)</td>
               <td class="c-format"><span class="fmt-badge">BO5</span></td>
               <td class="c-dur">1 Hr 30m</td>
@@ -789,8 +789,6 @@
 
     </div>
   </div>
-
-  <div class="note">🏆 Team Hashira Mobile Legends Try-Out — Gamitin ang ➖ / ➕ sa baba, Pinch-to-Zoom (Mobile/Tablet), o Ctrl + Scroll (PC/Laptop) para mag-Zoom In/Out!</div>
 
   <script>
     /* =========================================================
