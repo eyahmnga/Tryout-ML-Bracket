@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>THE FINAL SELECTION - Team Hashira Mobile Legends Try Out</title>
   <meta property="og:title" content="THE FINAL SELECTION - Team Hashira MLBB Bracket & Schedule">
   <meta property="og:description" content="Official Team Hashira Mobile Legends Try-Out Tournament Bracket & 2-Day Match Schedule">
@@ -1279,6 +1282,46 @@
     function resetLocal() {
       if (confirm('I-reset ang local edits?')) { localStorage.removeItem('hashiraBracket'); location.reload(); }
     }
+
+    /* Automatic live update polling (checks every 20 seconds for bracket & schedule changes) */
+    setInterval(() => {
+      fetch('index.html?check=' + Date.now(), { cache: 'no-store' })
+        .then(res => res.text())
+        .then(html => {
+          const m = html.match(/const DATA = ({[\s\S]*?});/);
+          if (!m) return;
+          try {
+            const freshData = eval('(' + m[1] + ')');
+            let changed = false;
+            Object.keys(freshData).forEach(k => {
+              if (DATA[k] !== freshData[k]) {
+                DATA[k] = freshData[k];
+                const boxEl = document.getElementById(k);
+                if (boxEl && !isEdit) {
+                  boxEl.textContent = freshData[k] || '';
+                  changed = true;
+                }
+              }
+            });
+            // Update Day 1 & Day 2 Schedule table if changed
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newD1 = doc.getElementById('day1-schedule');
+            const curD1 = document.getElementById('day1-schedule');
+            if (newD1 && curD1 && newD1.innerHTML !== curD1.innerHTML) {
+              curD1.innerHTML = newD1.innerHTML;
+            }
+            const newD2 = doc.getElementById('day2-schedule');
+            const curD2 = document.getElementById('day2-schedule');
+            if (newD2 && curD2 && newD2.innerHTML !== curD2.innerHTML) {
+              curD2.innerHTML = newD2.innerHTML;
+            }
+          } catch (e) {
+            console.error('Polling parse error:', e);
+          }
+        })
+        .catch(() => {});
+    }, 20000);
   </script>
 </body>
 </html>
