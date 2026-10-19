@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1285,7 +1285,7 @@
 
     /* Automatic live update polling (checks every 20 seconds for bracket & schedule changes) */
     setInterval(() => {
-      fetch('index.html?check=' + Date.now(), { cache: 'no-store' })
+      fetch('https://raw.githubusercontent.com/eyahmnga/Tryout-ML-Bracket/main/index.html?t=' + Date.now(), { cache: 'no-store' })
         .then(res => res.text())
         .then(html => {
           const m = html.match(/const DATA = ({[\s\S]*?});/);
